@@ -244,6 +244,7 @@
     </Content>
     <Content Include="Update-NDS.xml" />
     <Content Include="Update-NES.xml" />
+    <Content Include="version.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

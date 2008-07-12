@@ -130,13 +130,14 @@
     <value>True</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 52</value>
+    <value>318, 60</value>
   </data>
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>Project http://sourceforge.net/projects/swift-rom
+    <value>Project http://swift-rom.googlecode.com
+        http://sourceforge.net/projects/swift-rom
 
 My Blog http://0123.blog.163.com </value>
   </data>
@@ -153,10 +154,10 @@ My Blog http://0123.blog.163.com </value>
     <value>0</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 179</value>
+    <value>22, 171</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 78</value>
+    <value>330, 86</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

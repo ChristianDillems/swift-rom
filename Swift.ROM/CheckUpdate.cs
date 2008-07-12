@@ -25,7 +25,7 @@ namespace Swift.ROM
 			try
 			{
 				// Create a request for the URL. 		
-				WebRequest request = WebRequest.Create("http://swift-rom.sourceforge.net/version.txt");
+                WebRequest request = WebRequest.Create("http://swift-rom.googlecode.com/svn/trunk/Swift.ROM/version.txt");
 				// If required by the server, set the credentials.
 				//request.Credentials = CredentialCache.DefaultCredentials;
 				// Get the response.

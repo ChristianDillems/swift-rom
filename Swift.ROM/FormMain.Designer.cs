@@ -76,28 +76,6 @@
             this.Other = new System.Windows.Forms.TabPage();
             this.listViewOther = new System.Windows.Forms.ListView();
             this.imageListOther = new System.Windows.Forms.ImageList(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbShowVerifyRom = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowUnseenROM = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowUnknowRom = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowT0 = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowT1 = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowT2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbViewGroups = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsbViewGroupC = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbViewGroupYear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowFavorite = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowNES = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowGBA = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowNDS = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miVerifyROM = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,6 +124,28 @@
             this.miCheckUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbShowVerifyRom = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowUnseenROM = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowUnknowRom = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowT0 = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowT1 = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowT2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbViewGroups = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsbViewGroupC = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbViewGroupYear = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowFavorite = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowNES = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowGBA = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowNDS = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.dataSet = new System.Data.DataSet();
             this.dataTableR = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -181,8 +181,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPIC)).BeginInit();
             this.groupBoxInfo.SuspendLayout();
             this.Other.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
@@ -205,8 +205,8 @@
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
             // statusStrip1
             // 
@@ -534,179 +534,6 @@
             this.imageListOther.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
             resources.ApplyResources(this.imageListOther, "imageListOther");
             this.imageListOther.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // toolStrip1
-            // 
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbShowVerifyRom,
-            this.tsbShowUnseenROM,
-            this.tsbShowUnknowRom,
-            this.toolStripSeparator11,
-            this.tsbShowT0,
-            this.tsbShowT1,
-            this.tsbShowT2,
-            this.toolStripSeparator14,
-            this.tsbViewGroups,
-            this.toolStripSeparator9,
-            this.tsbShowFavorite,
-            this.toolStripSeparator5,
-            this.tsbShowNES,
-            this.tsbShowGBA,
-            this.tsbShowNDS,
-            this.toolStripSeparator2,
-            this.toolStripButton2,
-            this.toolStripSeparator1,
-            this.toolStripButton1});
-            this.toolStrip1.Name = "toolStrip1";
-            // 
-            // tsbShowVerifyRom
-            // 
-            this.tsbShowVerifyRom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowVerifyRom.Image = global::Swift.ROM.Properties.Resources.aa2;
-            resources.ApplyResources(this.tsbShowVerifyRom, "tsbShowVerifyRom");
-            this.tsbShowVerifyRom.Name = "tsbShowVerifyRom";
-            this.tsbShowVerifyRom.Click += new System.EventHandler(this.tsbShowVerifyRom_Click);
-            // 
-            // tsbShowUnseenROM
-            // 
-            this.tsbShowUnseenROM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowUnseenROM.Image = global::Swift.ROM.Properties.Resources.aa1;
-            resources.ApplyResources(this.tsbShowUnseenROM, "tsbShowUnseenROM");
-            this.tsbShowUnseenROM.Name = "tsbShowUnseenROM";
-            this.tsbShowUnseenROM.Click += new System.EventHandler(this.tsbShowUnseenROM_Click);
-            // 
-            // tsbShowUnknowRom
-            // 
-            this.tsbShowUnknowRom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowUnknowRom.Image = global::Swift.ROM.Properties.Resources.aa3;
-            resources.ApplyResources(this.tsbShowUnknowRom, "tsbShowUnknowRom");
-            this.tsbShowUnknowRom.Name = "tsbShowUnknowRom";
-            this.tsbShowUnknowRom.Click += new System.EventHandler(this.tsbShowUnknowRom_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
-            // 
-            // tsbShowT0
-            // 
-            this.tsbShowT0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowT0.Image = global::Swift.ROM.Properties.Resources.cd0;
-            resources.ApplyResources(this.tsbShowT0, "tsbShowT0");
-            this.tsbShowT0.Name = "tsbShowT0";
-            this.tsbShowT0.Click += new System.EventHandler(this.tsbShowT0_Click);
-            // 
-            // tsbShowT1
-            // 
-            this.tsbShowT1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowT1.Image = global::Swift.ROM.Properties.Resources.cd1;
-            resources.ApplyResources(this.tsbShowT1, "tsbShowT1");
-            this.tsbShowT1.Name = "tsbShowT1";
-            this.tsbShowT1.Click += new System.EventHandler(this.tsbShowT1_Click);
-            // 
-            // tsbShowT2
-            // 
-            this.tsbShowT2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowT2.Image = global::Swift.ROM.Properties.Resources.cd2;
-            resources.ApplyResources(this.tsbShowT2, "tsbShowT2");
-            this.tsbShowT2.Name = "tsbShowT2";
-            this.tsbShowT2.Click += new System.EventHandler(this.tsbShowT2_Click);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
-            // 
-            // tsbViewGroups
-            // 
-            this.tsbViewGroups.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbViewGroups.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbViewGroupC,
-            this.tsbViewGroupYear});
-            resources.ApplyResources(this.tsbViewGroups, "tsbViewGroups");
-            this.tsbViewGroups.Name = "tsbViewGroups";
-            // 
-            // tsbViewGroupC
-            // 
-            this.tsbViewGroupC.Name = "tsbViewGroupC";
-            resources.ApplyResources(this.tsbViewGroupC, "tsbViewGroupC");
-            this.tsbViewGroupC.Click += new System.EventHandler(this.miViewGroupC_Click);
-            // 
-            // tsbViewGroupYear
-            // 
-            this.tsbViewGroupYear.Name = "tsbViewGroupYear";
-            resources.ApplyResources(this.tsbViewGroupYear, "tsbViewGroupYear");
-            this.tsbViewGroupYear.Click += new System.EventHandler(this.miViewGroupYear_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // tsbShowFavorite
-            // 
-            this.tsbShowFavorite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowFavorite.Image = global::Swift.ROM.Properties.Resources.fav;
-            resources.ApplyResources(this.tsbShowFavorite, "tsbShowFavorite");
-            this.tsbShowFavorite.Name = "tsbShowFavorite";
-            this.tsbShowFavorite.Click += new System.EventHandler(this.tsbShowFavorite_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
-            // 
-            // tsbShowNES
-            // 
-            this.tsbShowNES.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowNES.Image = global::Swift.ROM.Properties.Resources.nes1;
-            resources.ApplyResources(this.tsbShowNES, "tsbShowNES");
-            this.tsbShowNES.Name = "tsbShowNES";
-            this.tsbShowNES.Click += new System.EventHandler(this.tsbShowNES_Click);
-            // 
-            // tsbShowGBA
-            // 
-            this.tsbShowGBA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowGBA.Image = global::Swift.ROM.Properties.Resources.GBA1;
-            resources.ApplyResources(this.tsbShowGBA, "tsbShowGBA");
-            this.tsbShowGBA.Name = "tsbShowGBA";
-            this.tsbShowGBA.Tag = "GBA";
-            this.tsbShowGBA.Click += new System.EventHandler(this.tsbShowGBA_Click);
-            // 
-            // tsbShowNDS
-            // 
-            this.tsbShowNDS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbShowNDS.Image = global::Swift.ROM.Properties.Resources.ds;
-            resources.ApplyResources(this.tsbShowNDS, "tsbShowNDS");
-            this.tsbShowNDS.Name = "tsbShowNDS";
-            this.tsbShowNDS.Click += new System.EventHandler(this.tsbShowNDS_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::Swift.ROM.Properties.Resources.refresh;
-            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Swift.ROM.Properties.Resources.exit;
-            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.miExit_Click);
             // 
             // menuStrip1
             // 
@@ -1055,6 +882,179 @@
             resources.ApplyResources(this.miAbout, "miAbout");
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
+            // toolStrip1
+            // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbShowVerifyRom,
+            this.tsbShowUnseenROM,
+            this.tsbShowUnknowRom,
+            this.toolStripSeparator11,
+            this.tsbShowT0,
+            this.tsbShowT1,
+            this.tsbShowT2,
+            this.toolStripSeparator14,
+            this.tsbViewGroups,
+            this.toolStripSeparator9,
+            this.tsbShowFavorite,
+            this.toolStripSeparator5,
+            this.tsbShowNES,
+            this.tsbShowGBA,
+            this.tsbShowNDS,
+            this.toolStripSeparator2,
+            this.toolStripButton2,
+            this.toolStripSeparator1,
+            this.toolStripButton1});
+            this.toolStrip1.Name = "toolStrip1";
+            // 
+            // tsbShowVerifyRom
+            // 
+            this.tsbShowVerifyRom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowVerifyRom.Image = global::Swift.ROM.Properties.Resources.aa2;
+            resources.ApplyResources(this.tsbShowVerifyRom, "tsbShowVerifyRom");
+            this.tsbShowVerifyRom.Name = "tsbShowVerifyRom";
+            this.tsbShowVerifyRom.Click += new System.EventHandler(this.tsbShowVerifyRom_Click);
+            // 
+            // tsbShowUnseenROM
+            // 
+            this.tsbShowUnseenROM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowUnseenROM.Image = global::Swift.ROM.Properties.Resources.aa1;
+            resources.ApplyResources(this.tsbShowUnseenROM, "tsbShowUnseenROM");
+            this.tsbShowUnseenROM.Name = "tsbShowUnseenROM";
+            this.tsbShowUnseenROM.Click += new System.EventHandler(this.tsbShowUnseenROM_Click);
+            // 
+            // tsbShowUnknowRom
+            // 
+            this.tsbShowUnknowRom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowUnknowRom.Image = global::Swift.ROM.Properties.Resources.aa3;
+            resources.ApplyResources(this.tsbShowUnknowRom, "tsbShowUnknowRom");
+            this.tsbShowUnknowRom.Name = "tsbShowUnknowRom";
+            this.tsbShowUnknowRom.Click += new System.EventHandler(this.tsbShowUnknowRom_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            // 
+            // tsbShowT0
+            // 
+            this.tsbShowT0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowT0.Image = global::Swift.ROM.Properties.Resources.cd0;
+            resources.ApplyResources(this.tsbShowT0, "tsbShowT0");
+            this.tsbShowT0.Name = "tsbShowT0";
+            this.tsbShowT0.Click += new System.EventHandler(this.tsbShowT0_Click);
+            // 
+            // tsbShowT1
+            // 
+            this.tsbShowT1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowT1.Image = global::Swift.ROM.Properties.Resources.cd1;
+            resources.ApplyResources(this.tsbShowT1, "tsbShowT1");
+            this.tsbShowT1.Name = "tsbShowT1";
+            this.tsbShowT1.Click += new System.EventHandler(this.tsbShowT1_Click);
+            // 
+            // tsbShowT2
+            // 
+            this.tsbShowT2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowT2.Image = global::Swift.ROM.Properties.Resources.cd2;
+            resources.ApplyResources(this.tsbShowT2, "tsbShowT2");
+            this.tsbShowT2.Name = "tsbShowT2";
+            this.tsbShowT2.Click += new System.EventHandler(this.tsbShowT2_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
+            // 
+            // tsbViewGroups
+            // 
+            this.tsbViewGroups.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbViewGroups.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbViewGroupC,
+            this.tsbViewGroupYear});
+            resources.ApplyResources(this.tsbViewGroups, "tsbViewGroups");
+            this.tsbViewGroups.Name = "tsbViewGroups";
+            // 
+            // tsbViewGroupC
+            // 
+            this.tsbViewGroupC.Name = "tsbViewGroupC";
+            resources.ApplyResources(this.tsbViewGroupC, "tsbViewGroupC");
+            this.tsbViewGroupC.Click += new System.EventHandler(this.miViewGroupC_Click);
+            // 
+            // tsbViewGroupYear
+            // 
+            this.tsbViewGroupYear.Name = "tsbViewGroupYear";
+            resources.ApplyResources(this.tsbViewGroupYear, "tsbViewGroupYear");
+            this.tsbViewGroupYear.Click += new System.EventHandler(this.miViewGroupYear_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // tsbShowFavorite
+            // 
+            this.tsbShowFavorite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowFavorite.Image = global::Swift.ROM.Properties.Resources.fav;
+            resources.ApplyResources(this.tsbShowFavorite, "tsbShowFavorite");
+            this.tsbShowFavorite.Name = "tsbShowFavorite";
+            this.tsbShowFavorite.Click += new System.EventHandler(this.tsbShowFavorite_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
+            // 
+            // tsbShowNES
+            // 
+            this.tsbShowNES.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowNES.Image = global::Swift.ROM.Properties.Resources.nes1;
+            resources.ApplyResources(this.tsbShowNES, "tsbShowNES");
+            this.tsbShowNES.Name = "tsbShowNES";
+            this.tsbShowNES.Click += new System.EventHandler(this.tsbShowNES_Click);
+            // 
+            // tsbShowGBA
+            // 
+            this.tsbShowGBA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowGBA.Image = global::Swift.ROM.Properties.Resources.GBA1;
+            resources.ApplyResources(this.tsbShowGBA, "tsbShowGBA");
+            this.tsbShowGBA.Name = "tsbShowGBA";
+            this.tsbShowGBA.Tag = "GBA";
+            this.tsbShowGBA.Click += new System.EventHandler(this.tsbShowGBA_Click);
+            // 
+            // tsbShowNDS
+            // 
+            this.tsbShowNDS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbShowNDS.Image = global::Swift.ROM.Properties.Resources.ds;
+            resources.ApplyResources(this.tsbShowNDS, "tsbShowNDS");
+            this.tsbShowNDS.Name = "tsbShowNDS";
+            this.tsbShowNDS.Click += new System.EventHandler(this.tsbShowNDS_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::Swift.ROM.Properties.Resources.refresh;
+            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Swift.ROM.Properties.Resources.exit;
+            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.miExit_Click);
+            // 
             // dataSet
             // 
             this.dataSet.DataSetName = "NewDataSet";
@@ -1200,10 +1200,10 @@
             this.groupBoxInfo.ResumeLayout(false);
             this.groupBoxInfo.PerformLayout();
             this.Other.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();

@@ -1239,7 +1239,7 @@ namespace Swift.ROM
 
 		private void miProjectWeb_Click(object sender, EventArgs e)
 		{
-			Tools.Start("http://sourceforge.net/projects/swift-rom");
+            Tools.Start("http://swift-rom.googlecode.com");
 		}
 
 		private void miCopy_Click(object sender, EventArgs e)
@@ -1300,7 +1300,7 @@ namespace Swift.ROM
 
 		private void miSubmitBug_Click(object sender, EventArgs e)
 		{
-			Tools.Start("http://sourceforge.net/tracker/?func=add&group_id=192786&atid=942798");
+            Tools.Start("http://code.google.com/p/swift-rom/issues/list");
 		}
 
 		private void miImageSaveAs_Click(object sender, EventArgs e)
@@ -1383,7 +1383,7 @@ namespace Swift.ROM
 		private void toolStripStatusLabelUpdate_Click(object sender, EventArgs e)
 		{
 			if (this.toolStripStatusLabelUpdate.IsLink)
-				Tools.Start("http://sourceforge.net/project/showfiles.php?group_id=192786");
+                Tools.Start("http://code.google.com/p/swift-rom/downloads/list");
 		}
 
 		private void tsbShowT0_Click(object sender, EventArgs e)
