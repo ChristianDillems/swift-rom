@@ -859,6 +859,8 @@ namespace Swift.ROM
 
 		private void listView_SelectedIndexChanged(object sender, EventArgs e)
 		{
+            this.labelInfo.Text = null;
+
 			//如果没有ROM被选择，则把图像置为空，并返回
 			if (this.listView.SelectedItems.Count == 0)
 			{
@@ -881,7 +883,7 @@ namespace Swift.ROM
 				this.labelMessage.Text = "Ready.";
 				return;
 			}
-
+            
 			DataRow[] rows = this.dataTableR.Select("A='" + lvi.Tag.ToString() + "'");
 			if (rows.Length == 0)
 				rows = this.dataTableR.Select("I='" + lvi.Tag.ToString() + "'");
@@ -985,8 +987,26 @@ namespace Swift.ROM
 			this.miFavorite.Checked =!rows[0].IsNull("F");
             this.miSaveAsOriginal.Enabled = rows[0]["f"].ToString().Split('?').Length > 1;
 			this.miReDownload.Enabled =!rows[0].IsNull("A");
-			this.labelInfo.Text = rows[0]["I"].ToString().Replace('|', '\n');
 
+            //显示rom详细信息
+            //  Columns[x]
+            //  0 No.           --> X
+            //  1 Chinese Name  --> N
+            //  2 English Name  --> E
+            //  3 Language      --> L
+            //  4 Type          --> T
+            //  5 Publish date  --> Y
+            //  6 Size          --> S
+            //  7 Publisher     --> C
+            if (rows[0]["X"].ToString() != "") this.labelInfo.Text += this.listView.Columns[0].Text + ":" + rows[0]["X"] + "\n";
+            if (rows[0]["N"].ToString() != "" && Application.CurrentCulture.Name.StartsWith("zh")) this.labelInfo.Text += this.listView.Columns[1].Text + ":" + rows[0]["N"] + "\n";
+            if (rows[0]["E"].ToString() != "") this.labelInfo.Text += this.listView.Columns[2].Text + ":" + rows[0]["E"] + "\n";
+            if (rows[0]["L"].ToString() != "") this.labelInfo.Text += this.listView.Columns[3].Text + ":" + rows[0]["L"] + "\n";
+            if (rows[0]["T"].ToString() != "") this.labelInfo.Text += this.listView.Columns[4].Text + ":" + rows[0]["T"] + "\n";
+            if (rows[0]["Y"].ToString() != "") this.labelInfo.Text += this.listView.Columns[5].Text + ":" + rows[0]["Y"] + "\n";
+            if (rows[0]["S"].ToString() != "") this.labelInfo.Text += this.listView.Columns[6].Text + ":" + rows[0]["S"] + "\n";
+            if (rows[0]["C"].ToString() != "") this.labelInfo.Text += this.listView.Columns[7].Text + ":" + rows[0]["C"] + "\n";
+            if (rows[0]["I"].ToString() != "") this.labelInfo.Text += rows[0]["I"].ToString().Replace('|', '\n');
 		}
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -1062,11 +1082,15 @@ namespace Swift.ROM
         private void miViewList_Click(object sender, EventArgs e)
         {
             this.listView.View = View.List;
+            this.miViewList.Checked = true;
+            this.miViewDetails.Checked = false;
         }
 
         private void miViewDetails_Click(object sender, EventArgs e)
         {
             this.listView.View = View.Details;
+            this.miViewList.Checked = false;
+            this.miViewDetails.Checked = true;
         }
 
         private void miFavorite_Click(object sender, EventArgs e)

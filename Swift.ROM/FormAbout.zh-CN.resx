@@ -118,7 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>项目网站 http://sourceforge.net/projects/swift-rom
+    <value>项目网站 http://http://code.google.com/p/swift-rom/
+         http://sourceforge.net/projects/swift-rom
 
 我的Blog http://0123.blog.163.com</value>
   </data>
