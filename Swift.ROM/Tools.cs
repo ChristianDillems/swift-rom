@@ -105,52 +105,11 @@ namespace Swift.ROM
 
 		public static Image GetImage(string fileName)
 		{
-			////判断文件是否存在
-			//String fn=Application.StartupPath;
-			//if (File.Exists(fn + fileName))
-			//    fn += fileName;
-			//else
-			//{
-			//    fn = Application.StartupPath + @"\2008";
-			//    if (File.Exists(fn + fileName))
-			//        fn += fileName;
-			//    else
-			//    {
-			//        fn = Application.StartupPath + @"\2008now";
-			//        if (File.Exists(fn + fileName))
-			//            fn += fileName;
-			//        else
-			//            return null;
-			//    }
-			//}
-
-			//fileName = fn;
-
 			byte[] bytes = File.ReadAllBytes(fileName);
 			MemoryStream ms = new MemoryStream(bytes);
 
 			return Image.FromStream(ms);
 		}
 
-		//public static String GetImageFileName(string fileName)
-		//{
-		//    String fn = Application.StartupPath;
-		//    if (File.Exists(fn + fileName))
-		//        return fn + fileName;
-		//    else
-		//    {
-		//        fn = Application.StartupPath + @"\2008";
-		//        if (File.Exists(fn + fileName))
-		//            return fn + fileName;
-		//        else
-		//        {
-		//            fn = Application.StartupPath + @"\2008now";
-		//            if (File.Exists(fn + fileName))
-		//                return fn + fileName;
-		//            else
-		//                return null;
-		//        }
-		//    }
-		//}
 	}
 }

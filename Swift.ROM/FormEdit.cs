@@ -84,6 +84,10 @@ namespace Swift.ROM
 				if (this.textBoxImg2.Text != "") m++;
             }
 
+            //看有没有图标,如果有则置为负数
+            if (this.pictureBoxIcon.Image != null)
+                m = -m;
+
             row["A"] = this.textBoxA.Text.Trim();//SHA1
 			row["C"] = this.textBoxC.Text.Trim() == "" ? null : this.textBoxC.Text.Trim();//出品公司
 			row["E"] = this.textBoxE.Text.Trim() == "" ? null : this.textBoxE.Text.Trim();//英文名
@@ -94,11 +98,11 @@ namespace Swift.ROM
 			row["X"] = this.textBoxX.Text.Trim() == "" ? null : this.textBoxX.Text.Trim();//编号
 			row["Y"] = this.textBoxY.Text.Trim() == "" ? null : this.textBoxY.Text.Trim();//年份
 			row["T"] = this.textBoxT.Text.Trim() == "" ? null : this.textBoxT.Text.Trim();
-            row["u"] = DateTime.Now;
-			if (m == 2)
-				row["m"] = DBNull.Value;
-			else
-				row["m"] = m;
+            row["u"] = (int)(DateTime.Now-(new DateTime(2008,1,1))).TotalMinutes;
+            if (m == 2)
+                row["m"] = DBNull.Value;
+            else
+			    row["m"] = m;
 
 			if (this.checkBoxHH.Checked)
 				row["H"] = "2";
@@ -126,8 +130,8 @@ namespace Swift.ROM
             {
                 if (this.textBoxImg1.Text != "")
                 {
-                    File.Copy(this.textBoxImg1.Text, Application.StartupPath + "/"+this.textBoxType.Text+"/" + this.textBoxA.Text + "_01.png");
-                    File.Copy(this.textBoxImg2.Text, Application.StartupPath + "/"+this.textBoxType.Text+"/" + this.textBoxA.Text + "_02.png");
+                    File.Copy(this.textBoxImg1.Text, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0,2)+"/" + this.textBoxA.Text + "_01.png");
+                    File.Copy(this.textBoxImg2.Text, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_02.png");
                 }
             }
             catch
@@ -185,11 +189,16 @@ namespace Swift.ROM
 				catch { }
 			}
 
+            m = Math.Abs(m);
+
+            if (File.Exists(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png")) 
+                this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+
 			for (int i = 1; i <= m; i++)
 			{
 				try
 				{
-					this.imageList1.Images.Add("k" + i, Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text + "_" + i.ToString("00") + ".png"));
+					this.imageList1.Images.Add("k" + i, Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/"+this.textBoxA.Text.Substring(0,2)+"/" + this.textBoxA.Text + "_" + i.ToString("00") + ".png"));
 					this.listViewImage.Items.Add(i.ToString("00"), "k" + i);
 				}
 				catch(Exception ex)
@@ -223,27 +232,27 @@ namespace Swift.ROM
                 xd.LoadXml(this.textBoxOffline.Text);
 
                 int picn = int.Parse(xd.SelectSingleNode("/game/imageNumber").InnerText);
-               	if (picn > 2500)
+               	if (picn > 2500 && this.textBoxType.Text=="GBA")
 				{
 					this.textBoxImg1.Text = @"D:\OfflineList 0.7.2\imgs\GBA - Official OfflineList\2501-3000/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "a.png";
 					this.textBoxImg2.Text = @"D:\OfflineList 0.7.2\imgs\GBA - Official OfflineList\2501-3000/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "b.png";
 				}
-				else if(picn<=1500)
-				{
-					this.textBoxImg1.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\1001-1500/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "a.png";
-					this.textBoxImg2.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\1001-1500/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "b.png";
-				}
-				else
+				else if(picn<=2500)
 				{
 					this.textBoxImg1.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\2001-2500/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "a.png";
 					this.textBoxImg2.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\2001-2500/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "b.png";
+				}
+				else
+				{
+					this.textBoxImg1.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\2501-3000/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "a.png";
+					this.textBoxImg2.Text = @"D:\OfflineList 0.7.2\imgs\ADVANsCEne Nintendo DS Collection\2501-3000/" + xd.SelectSingleNode("/game/imageNumber").InnerText + "b.png";
 				}
 
                 this.textBoxE.Text = xd.SelectSingleNode("/game/title").InnerText;
                 this.textBoxI.Text = "Source:" + xd.SelectSingleNode("/game/sourceRom").InnerText + "|";
                 this.textBoxI.Text += xd.SelectSingleNode("/game/saveType").InnerText;
                 this.textBoxC.Text = xd.SelectSingleNode("/game/publisher").InnerText;
-				if(picn>2500)
+				if(picn>2500 && this.textBoxType.Text=="GBA")
 					this.textBoxX.Text = xd.SelectSingleNode("/game/releaseNumber").InnerText;
 				else
 					this.textBoxX.Text = xd.SelectSingleNode("/game/comment").InnerText;
@@ -287,8 +296,8 @@ namespace Swift.ROM
 		{
 			try
 			{
-				File.Copy(this.textBoxImageFileName.Text, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text + "_" + this.numericUpDown1.Value.ToString("00") + ".png");
-				this.imageList1.Images.Add("k" + this.numericUpDown1.Value,Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text + "_" + this.numericUpDown1.Value.ToString("00") + ".png"));
+                File.Copy(this.textBoxImageFileName.Text, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0,2)+"/"+ this.textBoxA.Text + "_" + this.numericUpDown1.Value.ToString("00") + ".png");
+				this.imageList1.Images.Add("k" + this.numericUpDown1.Value,Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/"+this.textBoxA.Text.Substring(0,2)+"/" + this.textBoxA.Text + "_" + this.numericUpDown1.Value.ToString("00") + ".png"));
 				this.listViewImage.Items.Add(this.numericUpDown1.Value.ToString("00"), "k" + this.numericUpDown1.Value);
 				this.numericUpDown1.Value++;
 
@@ -306,12 +315,34 @@ namespace Swift.ROM
 				return;
 
 			//删除文件
-			File.Delete(Application.StartupPath+"/"+this.textBoxType.Text+"/"+this.textBoxA.Text+"_"+this.listViewImage.SelectedItems[0].Text+".png");
+			File.Delete(Application.StartupPath+"/"+this.textBoxType.Text+"/"+this.textBoxA.Text.Substring(0,2)+"/"+this.textBoxA.Text+"_"+this.listViewImage.SelectedItems[0].Text+".png");
 
 			//删除列表中的图标
 			this.listViewImage.SelectedItems[0].Remove();
 		}
 
+        private void pictureBoxIcon_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    File.Copy(this.openFileDialog1.FileName, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+                    File.Delete(this.openFileDialog1.FileName);
+                    this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void buttonDeleteIcon_Click(object sender, EventArgs e)
+        {
+            this.pictureBoxIcon.Image = null;
+            File.Delete(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+        }
 
     }
 }

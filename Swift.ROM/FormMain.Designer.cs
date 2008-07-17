@@ -63,6 +63,7 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.miImageSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.miImageSaveAsgame = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Info = new System.Windows.Forms.TabPage();
@@ -76,28 +77,6 @@
             this.Other = new System.Windows.Forms.TabPage();
             this.listViewOther = new System.Windows.Forms.ListView();
             this.imageListOther = new System.Windows.Forms.ImageList(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbShowVerifyRom = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowUnseenROM = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowUnknowRom = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowT0 = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowT1 = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowT2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbViewGroups = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsbViewGroupC = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbViewGroupYear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowFavorite = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbShowNES = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowGBA = new System.Windows.Forms.ToolStripButton();
-            this.tsbShowNDS = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miVerifyROM = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +102,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.miViewList = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.miViewTile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.miViewGroups = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewGroupC = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,6 +126,28 @@
             this.miCheckUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbShowVerifyRom = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowUnseenROM = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowUnknowRom = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowT0 = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowT1 = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowT2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbViewGroups = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsbViewGroupC = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbViewGroupYear = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowFavorite = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbShowNES = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowGBA = new System.Windows.Forms.ToolStripButton();
+            this.tsbShowNDS = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.dataSet = new System.Data.DataSet();
             this.dataTableR = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -181,8 +183,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPIC)).BeginInit();
             this.groupBoxInfo.SuspendLayout();
             this.Other.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
@@ -205,8 +207,8 @@
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
             // statusStrip1
             // 
@@ -296,8 +298,10 @@
             resources.ApplyResources(this.listView, "listView");
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
+            this.listView.LargeImageList = this.imageListLarge;
             this.listView.Name = "listView";
             this.listView.SmallImageList = this.imageList1;
+            this.listView.TileSize = new System.Drawing.Size(240, 40);
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
@@ -432,6 +436,23 @@
             resources.ApplyResources(this.miImageSaveAsgame, "miImageSaveAsgame");
             this.miImageSaveAsgame.Click += new System.EventHandler(this.miImageSaveAsgame_Click);
             // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "GBA1");
+            this.imageListLarge.Images.SetKeyName(1, "GBA2");
+            this.imageListLarge.Images.SetKeyName(2, "GBA3");
+            this.imageListLarge.Images.SetKeyName(3, "NDS1");
+            this.imageListLarge.Images.SetKeyName(4, "NDS2");
+            this.imageListLarge.Images.SetKeyName(5, "NDS3");
+            this.imageListLarge.Images.SetKeyName(6, "NES1");
+            this.imageListLarge.Images.SetKeyName(7, "NES2");
+            this.imageListLarge.Images.SetKeyName(8, "NES3");
+            this.imageListLarge.Images.SetKeyName(9, "FAV1");
+            this.imageListLarge.Images.SetKeyName(10, "FAV2");
+            this.imageListLarge.Images.SetKeyName(11, "FAV3");
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -534,6 +555,362 @@
             this.imageListOther.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
             resources.ApplyResources(this.imageListOther, "imageListOther");
             this.imageListOther.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // menuStrip1
+            // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.系统ToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.查看VToolStripMenuItem,
+            this.jixingToolStripMenuItem,
+            this.miRom,
+            this.窗口WToolStripMenuItem,
+            this.帮助HToolStripMenuItem});
+            this.menuStrip1.Name = "menuStrip1";
+            // 
+            // 系统ToolStripMenuItem
+            // 
+            this.系统ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miVerifyROM,
+            this.miStopVerifyROM,
+            this.toolStripSeparator6,
+            this.miPrint,
+            this.toolStripMenuItem5,
+            this.miSetup,
+            this.toolStripSeparator4,
+            this.miExit});
+            this.系统ToolStripMenuItem.Name = "系统ToolStripMenuItem";
+            resources.ApplyResources(this.系统ToolStripMenuItem, "系统ToolStripMenuItem");
+            // 
+            // miVerifyROM
+            // 
+            this.miVerifyROM.Name = "miVerifyROM";
+            resources.ApplyResources(this.miVerifyROM, "miVerifyROM");
+            this.miVerifyROM.Click += new System.EventHandler(this.miVerifyROM_Click);
+            // 
+            // miStopVerifyROM
+            // 
+            resources.ApplyResources(this.miStopVerifyROM, "miStopVerifyROM");
+            this.miStopVerifyROM.Name = "miStopVerifyROM";
+            this.miStopVerifyROM.Click += new System.EventHandler(this.miStopVerifyROM_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // miPrint
+            // 
+            this.miPrint.Name = "miPrint";
+            resources.ApplyResources(this.miPrint, "miPrint");
+            this.miPrint.Click += new System.EventHandler(this.miPrint_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
+            // 
+            // miSetup
+            // 
+            this.miSetup.Name = "miSetup";
+            resources.ApplyResources(this.miSetup, "miSetup");
+            this.miSetup.Click += new System.EventHandler(this.miSetup_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // miExit
+            // 
+            this.miExit.Image = global::Swift.ROM.Properties.Resources.exit;
+            this.miExit.Name = "miExit";
+            resources.ApplyResources(this.miExit, "miExit");
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCopy});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
+            // 
+            // miCopy
+            // 
+            this.miCopy.Name = "miCopy";
+            resources.ApplyResources(this.miCopy, "miCopy");
+            this.miCopy.Click += new System.EventHandler(this.miCopy_Click);
+            // 
+            // 查看VToolStripMenuItem
+            // 
+            this.查看VToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miShowVerifyROM,
+            this.miShowUnseenROM,
+            this.miShowUnknowROM,
+            this.toolStripSeparator10,
+            this.miShowT0,
+            this.miShowT1,
+            this.miShowT2,
+            this.toolStripSeparator15,
+            this.miShowFavorite,
+            this.toolStripSeparator7,
+            this.miViewList,
+            this.miViewDetails,
+            this.miViewTile,
+            this.toolStripSeparator8,
+            this.miViewGroups,
+            this.toolStripSeparator3,
+            this.miFind,
+            this.toolStripSeparator12,
+            this.miRefresh});
+            this.查看VToolStripMenuItem.Name = "查看VToolStripMenuItem";
+            resources.ApplyResources(this.查看VToolStripMenuItem, "查看VToolStripMenuItem");
+            // 
+            // miShowVerifyROM
+            // 
+            this.miShowVerifyROM.CheckOnClick = true;
+            this.miShowVerifyROM.Image = global::Swift.ROM.Properties.Resources.aa2;
+            this.miShowVerifyROM.Name = "miShowVerifyROM";
+            resources.ApplyResources(this.miShowVerifyROM, "miShowVerifyROM");
+            this.miShowVerifyROM.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // miShowUnseenROM
+            // 
+            this.miShowUnseenROM.CheckOnClick = true;
+            this.miShowUnseenROM.Image = global::Swift.ROM.Properties.Resources.aa1;
+            this.miShowUnseenROM.Name = "miShowUnseenROM";
+            resources.ApplyResources(this.miShowUnseenROM, "miShowUnseenROM");
+            this.miShowUnseenROM.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // miShowUnknowROM
+            // 
+            this.miShowUnknowROM.CheckOnClick = true;
+            this.miShowUnknowROM.Image = global::Swift.ROM.Properties.Resources.aa3;
+            this.miShowUnknowROM.Name = "miShowUnknowROM";
+            resources.ApplyResources(this.miShowUnknowROM, "miShowUnknowROM");
+            this.miShowUnknowROM.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // miShowT0
+            // 
+            this.miShowT0.CheckOnClick = true;
+            this.miShowT0.Image = global::Swift.ROM.Properties.Resources.cd0;
+            this.miShowT0.Name = "miShowT0";
+            resources.ApplyResources(this.miShowT0, "miShowT0");
+            this.miShowT0.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // miShowT1
+            // 
+            this.miShowT1.CheckOnClick = true;
+            this.miShowT1.Image = global::Swift.ROM.Properties.Resources.cd1;
+            this.miShowT1.Name = "miShowT1";
+            resources.ApplyResources(this.miShowT1, "miShowT1");
+            this.miShowT1.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // miShowT2
+            // 
+            this.miShowT2.CheckOnClick = true;
+            this.miShowT2.Image = global::Swift.ROM.Properties.Resources.cd2;
+            this.miShowT2.Name = "miShowT2";
+            resources.ApplyResources(this.miShowT2, "miShowT2");
+            this.miShowT2.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            // 
+            // miShowFavorite
+            // 
+            this.miShowFavorite.CheckOnClick = true;
+            this.miShowFavorite.Image = global::Swift.ROM.Properties.Resources.fav;
+            this.miShowFavorite.Name = "miShowFavorite";
+            resources.ApplyResources(this.miShowFavorite, "miShowFavorite");
+            this.miShowFavorite.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // miViewList
+            // 
+            this.miViewList.Name = "miViewList";
+            resources.ApplyResources(this.miViewList, "miViewList");
+            this.miViewList.Click += new System.EventHandler(this.miViewList_Click);
+            // 
+            // miViewDetails
+            // 
+            this.miViewDetails.Checked = true;
+            this.miViewDetails.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.miViewDetails.Name = "miViewDetails";
+            resources.ApplyResources(this.miViewDetails, "miViewDetails");
+            this.miViewDetails.Click += new System.EventHandler(this.miViewDetails_Click);
+            // 
+            // miViewTile
+            // 
+            this.miViewTile.Name = "miViewTile";
+            resources.ApplyResources(this.miViewTile, "miViewTile");
+            this.miViewTile.Click += new System.EventHandler(this.miViewTile_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // miViewGroups
+            // 
+            this.miViewGroups.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miViewGroupC,
+            this.miViewGroupYear});
+            this.miViewGroups.Name = "miViewGroups";
+            resources.ApplyResources(this.miViewGroups, "miViewGroups");
+            // 
+            // miViewGroupC
+            // 
+            this.miViewGroupC.Name = "miViewGroupC";
+            resources.ApplyResources(this.miViewGroupC, "miViewGroupC");
+            this.miViewGroupC.Click += new System.EventHandler(this.miViewGroupC_Click);
+            // 
+            // miViewGroupYear
+            // 
+            this.miViewGroupYear.Name = "miViewGroupYear";
+            resources.ApplyResources(this.miViewGroupYear, "miViewGroupYear");
+            this.miViewGroupYear.Click += new System.EventHandler(this.miViewGroupYear_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // miFind
+            // 
+            this.miFind.Name = "miFind";
+            resources.ApplyResources(this.miFind, "miFind");
+            this.miFind.Click += new System.EventHandler(this.miFind_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            // 
+            // miRefresh
+            // 
+            this.miRefresh.Image = global::Swift.ROM.Properties.Resources.refresh;
+            this.miRefresh.Name = "miRefresh";
+            resources.ApplyResources(this.miRefresh, "miRefresh");
+            this.miRefresh.Click += new System.EventHandler(this.miRefresh_Click);
+            // 
+            // jixingToolStripMenuItem
+            // 
+            this.jixingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miShowNES,
+            this.miShowGBA,
+            this.miShowNDS});
+            this.jixingToolStripMenuItem.Name = "jixingToolStripMenuItem";
+            resources.ApplyResources(this.jixingToolStripMenuItem, "jixingToolStripMenuItem");
+            // 
+            // miShowNES
+            // 
+            this.miShowNES.Image = global::Swift.ROM.Properties.Resources.nes1;
+            this.miShowNES.Name = "miShowNES";
+            resources.ApplyResources(this.miShowNES, "miShowNES");
+            this.miShowNES.Tag = "NES";
+            this.miShowNES.Click += new System.EventHandler(this.miShow_Click);
+            // 
+            // miShowGBA
+            // 
+            this.miShowGBA.Image = global::Swift.ROM.Properties.Resources.GBA1;
+            this.miShowGBA.Name = "miShowGBA";
+            resources.ApplyResources(this.miShowGBA, "miShowGBA");
+            this.miShowGBA.Tag = "GBA";
+            this.miShowGBA.Click += new System.EventHandler(this.miShow_Click);
+            // 
+            // miShowNDS
+            // 
+            this.miShowNDS.Image = global::Swift.ROM.Properties.Resources.ds;
+            this.miShowNDS.Name = "miShowNDS";
+            resources.ApplyResources(this.miShowNDS, "miShowNDS");
+            this.miShowNDS.Tag = "NDS";
+            this.miShowNDS.Click += new System.EventHandler(this.miShow_Click);
+            // 
+            // miRom
+            // 
+            this.miRom.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miRomEdit});
+            this.miRom.Name = "miRom";
+            resources.ApplyResources(this.miRom, "miRom");
+            // 
+            // miRomEdit
+            // 
+            this.miRomEdit.Name = "miRomEdit";
+            resources.ApplyResources(this.miRomEdit, "miRomEdit");
+            this.miRomEdit.Click += new System.EventHandler(this.miRomEdit_Click);
+            // 
+            // 窗口WToolStripMenuItem
+            // 
+            this.窗口WToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFormDownload});
+            this.窗口WToolStripMenuItem.Name = "窗口WToolStripMenuItem";
+            resources.ApplyResources(this.窗口WToolStripMenuItem, "窗口WToolStripMenuItem");
+            // 
+            // miFormDownload
+            // 
+            this.miFormDownload.Name = "miFormDownload";
+            resources.ApplyResources(this.miFormDownload, "miFormDownload");
+            this.miFormDownload.Click += new System.EventHandler(this.miFormDownload_Click);
+            // 
+            // 帮助HToolStripMenuItem
+            // 
+            this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miProjectWeb,
+            this.miSubmitBug,
+            this.toolStripMenuItem4,
+            this.miCheckUpdate,
+            this.toolStripMenuItem2,
+            this.miAbout});
+            this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
+            resources.ApplyResources(this.帮助HToolStripMenuItem, "帮助HToolStripMenuItem");
+            // 
+            // miProjectWeb
+            // 
+            this.miProjectWeb.Name = "miProjectWeb";
+            resources.ApplyResources(this.miProjectWeb, "miProjectWeb");
+            this.miProjectWeb.Click += new System.EventHandler(this.miProjectWeb_Click);
+            // 
+            // miSubmitBug
+            // 
+            this.miSubmitBug.Name = "miSubmitBug";
+            resources.ApplyResources(this.miSubmitBug, "miSubmitBug");
+            this.miSubmitBug.Click += new System.EventHandler(this.miSubmitBug_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
+            // 
+            // miCheckUpdate
+            // 
+            this.miCheckUpdate.Image = global::Swift.ROM.Properties.Resources.update1;
+            this.miCheckUpdate.Name = "miCheckUpdate";
+            resources.ApplyResources(this.miCheckUpdate, "miCheckUpdate");
+            this.miCheckUpdate.Click += new System.EventHandler(this.miCheckUpdate_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            // 
+            // miAbout
+            // 
+            this.miAbout.Name = "miAbout";
+            resources.ApplyResources(this.miAbout, "miAbout");
+            this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
             // toolStrip1
             // 
@@ -708,353 +1085,6 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.miExit_Click);
             // 
-            // menuStrip1
-            // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.系统ToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.查看VToolStripMenuItem,
-            this.jixingToolStripMenuItem,
-            this.miRom,
-            this.窗口WToolStripMenuItem,
-            this.帮助HToolStripMenuItem});
-            this.menuStrip1.Name = "menuStrip1";
-            // 
-            // 系统ToolStripMenuItem
-            // 
-            this.系统ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miVerifyROM,
-            this.miStopVerifyROM,
-            this.toolStripSeparator6,
-            this.miPrint,
-            this.toolStripMenuItem5,
-            this.miSetup,
-            this.toolStripSeparator4,
-            this.miExit});
-            this.系统ToolStripMenuItem.Name = "系统ToolStripMenuItem";
-            resources.ApplyResources(this.系统ToolStripMenuItem, "系统ToolStripMenuItem");
-            // 
-            // miVerifyROM
-            // 
-            this.miVerifyROM.Name = "miVerifyROM";
-            resources.ApplyResources(this.miVerifyROM, "miVerifyROM");
-            this.miVerifyROM.Click += new System.EventHandler(this.miVerifyROM_Click);
-            // 
-            // miStopVerifyROM
-            // 
-            resources.ApplyResources(this.miStopVerifyROM, "miStopVerifyROM");
-            this.miStopVerifyROM.Name = "miStopVerifyROM";
-            this.miStopVerifyROM.Click += new System.EventHandler(this.miStopVerifyROM_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // miPrint
-            // 
-            this.miPrint.Name = "miPrint";
-            resources.ApplyResources(this.miPrint, "miPrint");
-            this.miPrint.Click += new System.EventHandler(this.miPrint_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
-            // 
-            // miSetup
-            // 
-            this.miSetup.Name = "miSetup";
-            resources.ApplyResources(this.miSetup, "miSetup");
-            this.miSetup.Click += new System.EventHandler(this.miSetup_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
-            // 
-            // miExit
-            // 
-            this.miExit.Image = global::Swift.ROM.Properties.Resources.exit;
-            this.miExit.Name = "miExit";
-            resources.ApplyResources(this.miExit, "miExit");
-            this.miExit.Click += new System.EventHandler(this.miExit_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miCopy});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
-            // 
-            // miCopy
-            // 
-            this.miCopy.Name = "miCopy";
-            resources.ApplyResources(this.miCopy, "miCopy");
-            this.miCopy.Click += new System.EventHandler(this.miCopy_Click);
-            // 
-            // 查看VToolStripMenuItem
-            // 
-            this.查看VToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miShowVerifyROM,
-            this.miShowUnseenROM,
-            this.miShowUnknowROM,
-            this.toolStripSeparator10,
-            this.miShowT0,
-            this.miShowT1,
-            this.miShowT2,
-            this.toolStripSeparator15,
-            this.miShowFavorite,
-            this.toolStripSeparator7,
-            this.miViewList,
-            this.miViewDetails,
-            this.toolStripSeparator8,
-            this.miViewGroups,
-            this.toolStripSeparator3,
-            this.miFind,
-            this.toolStripSeparator12,
-            this.miRefresh});
-            this.查看VToolStripMenuItem.Name = "查看VToolStripMenuItem";
-            resources.ApplyResources(this.查看VToolStripMenuItem, "查看VToolStripMenuItem");
-            // 
-            // miShowVerifyROM
-            // 
-            this.miShowVerifyROM.CheckOnClick = true;
-            this.miShowVerifyROM.Image = global::Swift.ROM.Properties.Resources.aa2;
-            this.miShowVerifyROM.Name = "miShowVerifyROM";
-            resources.ApplyResources(this.miShowVerifyROM, "miShowVerifyROM");
-            this.miShowVerifyROM.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // miShowUnseenROM
-            // 
-            this.miShowUnseenROM.CheckOnClick = true;
-            this.miShowUnseenROM.Image = global::Swift.ROM.Properties.Resources.aa1;
-            this.miShowUnseenROM.Name = "miShowUnseenROM";
-            resources.ApplyResources(this.miShowUnseenROM, "miShowUnseenROM");
-            this.miShowUnseenROM.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // miShowUnknowROM
-            // 
-            this.miShowUnknowROM.CheckOnClick = true;
-            this.miShowUnknowROM.Image = global::Swift.ROM.Properties.Resources.aa3;
-            this.miShowUnknowROM.Name = "miShowUnknowROM";
-            resources.ApplyResources(this.miShowUnknowROM, "miShowUnknowROM");
-            this.miShowUnknowROM.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
-            // 
-            // miShowT0
-            // 
-            this.miShowT0.CheckOnClick = true;
-            this.miShowT0.Image = global::Swift.ROM.Properties.Resources.cd0;
-            this.miShowT0.Name = "miShowT0";
-            resources.ApplyResources(this.miShowT0, "miShowT0");
-            this.miShowT0.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // miShowT1
-            // 
-            this.miShowT1.CheckOnClick = true;
-            this.miShowT1.Image = global::Swift.ROM.Properties.Resources.cd1;
-            this.miShowT1.Name = "miShowT1";
-            resources.ApplyResources(this.miShowT1, "miShowT1");
-            this.miShowT1.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // miShowT2
-            // 
-            this.miShowT2.CheckOnClick = true;
-            this.miShowT2.Image = global::Swift.ROM.Properties.Resources.cd2;
-            this.miShowT2.Name = "miShowT2";
-            resources.ApplyResources(this.miShowT2, "miShowT2");
-            this.miShowT2.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
-            // 
-            // miShowFavorite
-            // 
-            this.miShowFavorite.CheckOnClick = true;
-            this.miShowFavorite.Image = global::Swift.ROM.Properties.Resources.fav;
-            this.miShowFavorite.Name = "miShowFavorite";
-            resources.ApplyResources(this.miShowFavorite, "miShowFavorite");
-            this.miShowFavorite.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // miViewList
-            // 
-            this.miViewList.Name = "miViewList";
-            resources.ApplyResources(this.miViewList, "miViewList");
-            this.miViewList.Click += new System.EventHandler(this.miViewList_Click);
-            // 
-            // miViewDetails
-            // 
-            this.miViewDetails.Name = "miViewDetails";
-            resources.ApplyResources(this.miViewDetails, "miViewDetails");
-            this.miViewDetails.Click += new System.EventHandler(this.miViewDetails_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // miViewGroups
-            // 
-            this.miViewGroups.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miViewGroupC,
-            this.miViewGroupYear});
-            this.miViewGroups.Name = "miViewGroups";
-            resources.ApplyResources(this.miViewGroups, "miViewGroups");
-            // 
-            // miViewGroupC
-            // 
-            this.miViewGroupC.Name = "miViewGroupC";
-            resources.ApplyResources(this.miViewGroupC, "miViewGroupC");
-            this.miViewGroupC.Click += new System.EventHandler(this.miViewGroupC_Click);
-            // 
-            // miViewGroupYear
-            // 
-            this.miViewGroupYear.Name = "miViewGroupYear";
-            resources.ApplyResources(this.miViewGroupYear, "miViewGroupYear");
-            this.miViewGroupYear.Click += new System.EventHandler(this.miViewGroupYear_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // miFind
-            // 
-            this.miFind.Name = "miFind";
-            resources.ApplyResources(this.miFind, "miFind");
-            this.miFind.Click += new System.EventHandler(this.miFind_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
-            // 
-            // miRefresh
-            // 
-            this.miRefresh.Image = global::Swift.ROM.Properties.Resources.refresh;
-            this.miRefresh.Name = "miRefresh";
-            resources.ApplyResources(this.miRefresh, "miRefresh");
-            this.miRefresh.Click += new System.EventHandler(this.miRefresh_Click);
-            // 
-            // jixingToolStripMenuItem
-            // 
-            this.jixingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miShowNES,
-            this.miShowGBA,
-            this.miShowNDS});
-            this.jixingToolStripMenuItem.Name = "jixingToolStripMenuItem";
-            resources.ApplyResources(this.jixingToolStripMenuItem, "jixingToolStripMenuItem");
-            // 
-            // miShowNES
-            // 
-            this.miShowNES.Image = global::Swift.ROM.Properties.Resources.nes1;
-            this.miShowNES.Name = "miShowNES";
-            resources.ApplyResources(this.miShowNES, "miShowNES");
-            this.miShowNES.Tag = "NES";
-            this.miShowNES.Click += new System.EventHandler(this.miShow_Click);
-            // 
-            // miShowGBA
-            // 
-            this.miShowGBA.Image = global::Swift.ROM.Properties.Resources.GBA1;
-            this.miShowGBA.Name = "miShowGBA";
-            resources.ApplyResources(this.miShowGBA, "miShowGBA");
-            this.miShowGBA.Tag = "GBA";
-            this.miShowGBA.Click += new System.EventHandler(this.miShow_Click);
-            // 
-            // miShowNDS
-            // 
-            this.miShowNDS.Image = global::Swift.ROM.Properties.Resources.ds;
-            this.miShowNDS.Name = "miShowNDS";
-            resources.ApplyResources(this.miShowNDS, "miShowNDS");
-            this.miShowNDS.Tag = "NDS";
-            this.miShowNDS.Click += new System.EventHandler(this.miShow_Click);
-            // 
-            // miRom
-            // 
-            this.miRom.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miRomEdit});
-            this.miRom.Name = "miRom";
-            resources.ApplyResources(this.miRom, "miRom");
-            // 
-            // miRomEdit
-            // 
-            this.miRomEdit.Name = "miRomEdit";
-            resources.ApplyResources(this.miRomEdit, "miRomEdit");
-            this.miRomEdit.Click += new System.EventHandler(this.miRomEdit_Click);
-            // 
-            // 窗口WToolStripMenuItem
-            // 
-            this.窗口WToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miFormDownload});
-            this.窗口WToolStripMenuItem.Name = "窗口WToolStripMenuItem";
-            resources.ApplyResources(this.窗口WToolStripMenuItem, "窗口WToolStripMenuItem");
-            // 
-            // miFormDownload
-            // 
-            this.miFormDownload.Name = "miFormDownload";
-            resources.ApplyResources(this.miFormDownload, "miFormDownload");
-            this.miFormDownload.Click += new System.EventHandler(this.miFormDownload_Click);
-            // 
-            // 帮助HToolStripMenuItem
-            // 
-            this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miProjectWeb,
-            this.miSubmitBug,
-            this.toolStripMenuItem4,
-            this.miCheckUpdate,
-            this.toolStripMenuItem2,
-            this.miAbout});
-            this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
-            resources.ApplyResources(this.帮助HToolStripMenuItem, "帮助HToolStripMenuItem");
-            // 
-            // miProjectWeb
-            // 
-            this.miProjectWeb.Name = "miProjectWeb";
-            resources.ApplyResources(this.miProjectWeb, "miProjectWeb");
-            this.miProjectWeb.Click += new System.EventHandler(this.miProjectWeb_Click);
-            // 
-            // miSubmitBug
-            // 
-            this.miSubmitBug.Name = "miSubmitBug";
-            resources.ApplyResources(this.miSubmitBug, "miSubmitBug");
-            this.miSubmitBug.Click += new System.EventHandler(this.miSubmitBug_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
-            // 
-            // miCheckUpdate
-            // 
-            this.miCheckUpdate.Image = global::Swift.ROM.Properties.Resources.update1;
-            this.miCheckUpdate.Name = "miCheckUpdate";
-            resources.ApplyResources(this.miCheckUpdate, "miCheckUpdate");
-            this.miCheckUpdate.Click += new System.EventHandler(this.miCheckUpdate_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
-            // 
-            // miAbout
-            // 
-            this.miAbout.Name = "miAbout";
-            resources.ApplyResources(this.miAbout, "miAbout");
-            this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
-            // 
             // dataSet
             // 
             this.dataSet.DataSetName = "NewDataSet";
@@ -1200,10 +1230,10 @@
             this.groupBoxInfo.ResumeLayout(false);
             this.groupBoxInfo.PerformLayout();
             this.Other.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();
@@ -1349,6 +1379,8 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem miSaveAs;
         private System.Windows.Forms.ToolStripMenuItem miReDownloadOther;
+        private System.Windows.Forms.ToolStripMenuItem miViewTile;
+        private System.Windows.Forms.ImageList imageListLarge;
     }
 }
 

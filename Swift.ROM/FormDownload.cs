@@ -30,7 +30,7 @@ namespace Swift.ROM
 
 		private ToolStripLabel tsl = null;
 
-		private string url = "http://test.shanmin.com/";
+		private string url = "http://swift-rom.googlecode.com/svn/png/";//"http://test.shanmin.com/";
 		
         private ListViewItem nowLvi=null;
 
@@ -51,8 +51,16 @@ namespace Swift.ROM
 				tsl.Text = "Images Downloading ...";
                 //this.webClient.DownloadFile(new Uri(url + lvi.Text), Application.StartupPath + "/" + lvi.Text);
 				//if(this.nowLvi.Text.StartsWith("GBA"))
-					this.webClient.DownloadFileAsync(new Uri(url + this.nowLvi.Text), Application.StartupPath + @"\" + this.nowLvi.Text);
-				//else
+
+                //判断下载的目录是否存在,如果不存在则重新建立
+                string dir0 = this.nowLvi.Text.Split('\\')[0];
+                string dir1 = this.nowLvi.Text.Split('\\')[1];
+                if (!Directory.Exists(Application.StartupPath + @"\" + dir0 + @"\" + dir1))
+                    Directory.CreateDirectory(Application.StartupPath + @"\" + dir0 + @"\" + dir1);
+
+				this.webClient.DownloadFileAsync(new Uri(url + this.nowLvi.Text), Application.StartupPath + @"\" + this.nowLvi.Text);
+				
+                //else
 				//	this.webClient.DownloadFileAsync(new Uri(url1 + this.nowLvi.Text), Application.StartupPath + "/" + this.nowLvi.Text);
             }
             catch

@@ -67,16 +67,25 @@ namespace Swift.ROM
             DataRow row;
 
             //记录本次最新的更新时间
-            DateTime ndt=new DateTime(2000,1,1);
+            int ndt = -1;
+            //DateTime ndt=new DateTime(2000,1,1);
 
             //读取最新的更新日期
-            DateTime udt = new DateTime(2000, 1, 1);
+            int udt = -1;
+            //DateTime udt = new DateTime(2000, 1, 1);
             if (File.Exists(Application.StartupPath + "/Swift.ROM.xml"))
             {
                 xd.Load(Application.StartupPath + "/Swift.ROM.xml");
                 xe = (XmlElement)xd.SelectSingleNode("/ROM/"+type);
-				if (xe.GetAttribute("u") != "")
-					ndt = udt = DateTime.Parse(xe.GetAttribute("u"));
+                if (xe.GetAttribute("u") != "")
+                {
+                    try
+                    {
+                        ndt = udt = int.Parse(xe.GetAttribute("u"));
+                        //ndt = udt = DateTime.Parse(xe.GetAttribute("u"));
+                    }
+                    catch { }
+                }
             }
 
             this.dataTableR.Rows.Clear();
@@ -105,7 +114,7 @@ namespace Swift.ROM
 					string[] tv = xe.GetAttribute("Version").Split('.');
 					string[] vv=Application.ProductVersion.Split('.');
 					if (tv.Length >= 4)
-					{ 
+					{
 						try
 						{
 							int t1=int.Parse(tv[0]);
@@ -121,20 +130,25 @@ namespace Swift.ROM
 							if(t1>=v1 && t2>=v2 && t3>=v3 && t4>=v4)
 								this.nowVersion = xe.GetAttribute("Version");
 						}
-							catch{}
+						catch{}
 					}
 					continue;
 				}
                
                 //判断更新日期是否是新的，如果不是新的则直接跳过更新
-                if (xe.GetAttribute("u") == "")
-                    continue;
-                else
-                    if (DateTime.Parse(xe.GetAttribute("u")) <= udt)
-                        continue;
+                int t = 0;
+                try
+                { 
+                    t = int.Parse(xe.GetAttribute("u"));
+                }
+                catch{}
 
-                if (DateTime.Parse(xe.GetAttribute("u")) > ndt)
-                    ndt = DateTime.Parse(xe.GetAttribute("u"));
+                if (t <= udt) continue;
+                if (t > ndt)
+                {
+                    ndt = t;
+                    Debug.WriteLine("u=" + ndt.ToString());
+                }
 
 				DataRow[] rows = this.dataTableR.Select("A='" + xe.GetAttribute("A") + "'");
                 if (rows.Length == 0)
@@ -502,6 +516,15 @@ namespace Swift.ROM
             this.listView.Items.Clear();
             this.listView.Groups.Clear();
 
+            foreach (string s in this.imageList1.Images.Keys)
+            {
+                if (s.StartsWith("i"))
+                {
+                    this.imageList1.Images.RemoveByKey(s);
+                    this.imageListLarge.Images.RemoveByKey(s);
+                }
+            }
+
             //创建分组
             this.listView.ShowGroups = this.miViewGroups.Checked;
             if (this.miViewGroups.Checked)
@@ -591,7 +614,8 @@ namespace Swift.ROM
 				if (lvi.Tag.ToString() == nowItem)
 				{
 					lvi.Selected = true;
-					this.listView.TopItem = lvi;
+                    if(this.listView.View!=View.Tile)
+					    this.listView.TopItem = lvi;
 					break;
 				}
 
@@ -630,7 +654,7 @@ namespace Swift.ROM
 				insert = true;
 			}
 
-			lvi.SubItems[0].Text = row["X"].ToString();
+            lvi.SubItems[0].Text = row["X"].ToString() == "" ? "----" : row["X"].ToString();
 			lvi.SubItems[1].Text = row["N"].ToString();
 			lvi.SubItems[2].Text = row["E"].ToString();
 			lvi.SubItems[3].Text = row["L"].ToString();
@@ -650,12 +674,48 @@ namespace Swift.ROM
 			}
 			else
 			{
-				if(row.IsNull("F"))
-					lvi.ImageKey = (row["f"] == DBNull.Value) ? this.nowType + "3" : this.nowType + "2";
-				else
-					lvi.ImageKey = (row["f"] == DBNull.Value) ? "FAV3" : "FAV2";
-			}
+                if (row.IsNull("F"))
+                {
+                   string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
+                   if (row["f"] == DBNull.Value)
+                    {
+                        if (File.Exists(fi))
+                        {
+                            Bitmap currentBitmap = new Bitmap(Tools.GetImage(fi));
+                            Graphics g = Graphics.FromImage(currentBitmap);
+                            float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
+                            System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
+                            ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
+                            g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
+                            g.Dispose();
 
+                            //currentBitmap.MakeTransparent(Color.FromArgb(165,0,165));
+
+                            this.imageListLarge.Images.Add("i" + row["A"].ToString(), currentBitmap);
+                            this.imageList1.Images.Add("i" + row["A"].ToString(), currentBitmap);
+                            //this.imageList1.Images.Add("i" + row["A"].ToString(),this.imageList1.Images[this.nowType+"2"]);
+                            lvi.ImageKey = "i" + row["A"].ToString();
+                        }
+                        else
+                            lvi.ImageKey = this.nowType + "3";
+                    }
+                    else
+                    {
+                        if (File.Exists(fi))
+                        {
+                            this.imageListLarge.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
+                            this.imageList1.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
+                            //this.imageList1.Images.Add("i" + row["A"].ToString(),this.imageList1.Images[this.nowType+"2"]);
+                            lvi.ImageKey = "i" + row["A"].ToString();
+                        }
+                        else
+                            lvi.ImageKey = this.nowType + "2";
+                    }
+                }
+                else
+                    lvi.ImageKey = (row["f"] == DBNull.Value) ? "FAV3" : "FAV2";
+			}
+           
 			if (this.miViewGroups.Checked)
 			{
 				if (this.miViewGroupC.Checked)   //出品公司
@@ -764,7 +824,11 @@ namespace Swift.ROM
 
 				//this.miRefresh.PerformClick();
 				rows=this.dataTableR.Select("A='"+this.listView.SelectedItems[0].Tag+"'");
-				this.updateLVI(rows[0], false, true);
+                try
+                {
+                    this.updateLVI(rows[0], false, true);
+                }
+                catch { }
 			}
 		}
 
@@ -864,10 +928,10 @@ namespace Swift.ROM
 			//如果没有ROM被选择，则把图像置为空，并返回
 			if (this.listView.SelectedItems.Count == 0)
 			{
-				if(this.pictureBoxTitle.Image==null || this.pictureBoxTitle.ImageLocation!=null)
-					this.pictureBoxTitle.ImageLocation = "http://sflogo.sourceforge.net/sflogo.php?group_id=192786&type=7";
-				if(this.pictureBoxPIC.Image==null || this.pictureBoxPIC.ImageLocation!=null)
-					this.pictureBoxPIC.ImageLocation = "http://images.sourceforge.net/images/project-support.jpg";
+				//if(this.pictureBoxTitle.Image==null || this.pictureBoxTitle.ImageLocation!=null)
+					//this.pictureBoxTitle.ImageLocation = "http://sflogo.sourceforge.net/sflogo.php?group_id=192786&type=7";
+				//if(this.pictureBoxPIC.Image==null || this.pictureBoxPIC.ImageLocation!=null)
+					//this.pictureBoxPIC.ImageLocation = "http://images.sourceforge.net/images/project-support.jpg";
 
 				this.pictureBoxTitle.Image = null;
 				this.pictureBoxPIC.Image = null;
@@ -892,8 +956,39 @@ namespace Swift.ROM
 
 			try
 			{
-				String fs = Application.StartupPath + @"\" + this.nowType + @"\" + lvi.Tag.ToString();
-				
+                String fn = this.nowType + @"\" + lvi.Tag.ToString().Substring(0, 2) + @"\" + lvi.Tag.ToString();
+                String fs = Application.StartupPath + @"\" + fn;
+				int m=2;
+				if(!rows[0].IsNull("m"))
+					m = (int)this.dataTableR.Select("A='" + lvi.Tag.ToString() + "'")[0]["m"];
+                //检测是否有图标,如果有图标而没有下载,则进行下载
+                if (this.autoDownload && m < 0 && !File.Exists(fs + "_00.png"))
+                    fd.download(fn + "_00.png");
+                m = Math.Abs(m);
+
+                //关于图片重新组织存储格式,原来单目录存储改为现在的 0xff 格式目录存储
+                //这样得有一个把原来的格式转换为新格式的途径,下面这段代码就转换这个存储目录的问题
+                //方法:把原有文件移动到新的目录中.
+                string fso = Application.StartupPath + @"\" + this.nowType + @"\" + lvi.Tag.ToString();
+                    for (int i = 1; i <= m; i++)
+                    {
+                        if (File.Exists(fso + "_" + i.ToString("00") + ".png"))
+                        {
+                            if (!Directory.Exists(Application.StartupPath + @"\" + this.nowType + @"\" + lvi.Tag.ToString().Substring(0, 2)))
+                                Directory.CreateDirectory(Application.StartupPath + @"\" + this.nowType + @"\" + lvi.Tag.ToString().Substring(0, 2));
+                            try
+                            {
+                                File.Move(fso + "_" + i.ToString("00") + ".png", fs + "_" + i.ToString("00") + ".png");
+                            }
+                            catch (Exception ex)
+                            {
+                                File.Delete(fso + "_" + i.ToString("00") + ".png");
+                                Debug.WriteLine("移动旧图片文件时出错：" + ex.Message);
+                            }
+                        }
+                    }
+                //以上这段代码预订2009-08删除
+	
 				if (File.Exists(fs + "_01.png"))
 				{
 					Image image = Tools.GetImage(fs + "_01.png");
@@ -908,8 +1003,8 @@ namespace Swift.ROM
 					this.pictureBoxTitle.Image = null;
 					this.pictureBoxTitle.ImageLocation = null;
 					this.pictureBoxTitle.Tag = null;
-					if (this.autoDownload && !rows[0].IsNull("A"))
-						fd.download(this.nowType + "/" + lvi.Tag.ToString() + "_01.png");
+                    if (this.autoDownload && !rows[0].IsNull("A"))
+                        fd.download(fn + "_01.png");
 				}
 
 				if (File.Exists(fs + "_02.png"))
@@ -925,16 +1020,13 @@ namespace Swift.ROM
 					this.pictureBoxPIC.Image = null;
 					this.pictureBoxPIC.ImageLocation = null;
 					this.pictureBoxPIC.Tag = null;
-					if (this.autoDownload && !rows[0].IsNull("A"))
-						fd.download(this.nowType + "/" + lvi.Tag.ToString() + "_02.png");
+                    if (this.autoDownload && !rows[0].IsNull("A"))
+                        fd.download(fn+ "_02.png");
 				}
 
 				//fill Other Image
 				this.listViewOther.Items.Clear();
 				this.imageListOther.Images.Clear();
-				int m=2;
-				if(!rows[0].IsNull("m"))
-					m = (int)this.dataTableR.Select("A='" + lvi.Tag.ToString() + "'")[0]["m"];
 				for (int i = 3; i <= m; i++)
 				{
 					if (File.Exists(fs + "_" + i.ToString("00") + ".png"))
@@ -953,7 +1045,7 @@ namespace Swift.ROM
 					{
                         //如果 开启自动下载 && 开始自动下载扩展图片 && 选择的ROM为收录ROM,则下载扩展图片
 						if (this.autoDownload && this.autoDownloadOther && !rows[0].IsNull("A"))
-							fd.download(this.nowType + "/" + lvi.Tag.ToString() + "_" + i.ToString("00") + ".png");
+							fd.download(fn + "_" + i.ToString("00") + ".png");
 					}
 				}
 				//判断是否有其它图像，如果没有则把Other标签关掉
@@ -1084,6 +1176,7 @@ namespace Swift.ROM
             this.listView.View = View.List;
             this.miViewList.Checked = true;
             this.miViewDetails.Checked = false;
+            this.miViewTile.Checked = false;
         }
 
         private void miViewDetails_Click(object sender, EventArgs e)
@@ -1091,6 +1184,15 @@ namespace Swift.ROM
             this.listView.View = View.Details;
             this.miViewList.Checked = false;
             this.miViewDetails.Checked = true;
+            this.miViewTile.Checked = false;
+        }
+
+        private void miViewTile_Click(object sender, EventArgs e)
+        {
+            this.listView.View = View.Tile;
+            this.miViewList.Checked = false;
+            this.miViewDetails.Checked = false;
+            this.miViewTile.Checked = true;
         }
 
         private void miFavorite_Click(object sender, EventArgs e)
