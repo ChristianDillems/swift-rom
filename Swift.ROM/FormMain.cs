@@ -665,22 +665,30 @@ namespace Swift.ROM
 			lvi.SubItems[8].Text = row["I"].ToString();
 			lvi.SubItems[9].Text = row["f"].ToString();
 
-			if (row["A"] == DBNull.Value)
-			{
-				if (row["f"] == DBNull.Value)
-					lvi.Remove();
-				else
-					lvi.ImageKey = row.IsNull("F") ? this.nowType + "1" : "FAV1";
-			}
-			else
-			{
+            if (row["A"] == DBNull.Value)
+            {
+                if (row["f"] == DBNull.Value)
+                    lvi.Remove();
+                else
+                    lvi.ImageKey = row.IsNull("F") ? this.nowType + "1" : "FAV1";
+            }
+            else
+            {
                 if (row.IsNull("F"))
                 {
-                   string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
-                   if (row["f"] == DBNull.Value)
+                    string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
+                    if (row["f"] == DBNull.Value)
                     {
                         if (File.Exists(fi))
                         {
+                            //清除以前图标
+                            if (this.imageList1.Images["i" + row["A"].ToString()] != null)
+                            {
+                                this.imageList1.Images.RemoveByKey("i" + row["A"].ToString());
+                                this.imageListLarge.Images.RemoveByKey("i" + row["A"].ToString());
+                            }
+
+                            //提出图标,并置黑白
                             Bitmap currentBitmap = new Bitmap(Tools.GetImage(fi));
                             Graphics g = Graphics.FromImage(currentBitmap);
                             float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
@@ -688,8 +696,6 @@ namespace Swift.ROM
                             ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
                             g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
                             g.Dispose();
-
-                            //currentBitmap.MakeTransparent(Color.FromArgb(165,0,165));
 
                             this.imageListLarge.Images.Add("i" + row["A"].ToString(), currentBitmap);
                             this.imageList1.Images.Add("i" + row["A"].ToString(), currentBitmap);
@@ -703,6 +709,13 @@ namespace Swift.ROM
                     {
                         if (File.Exists(fi))
                         {
+                            //清除以前图标
+                            if (this.imageList1.Images["i" + row["A"].ToString()] != null)
+                            {
+                                this.imageList1.Images.RemoveByKey("i" + row["A"].ToString());
+                                this.imageListLarge.Images.RemoveByKey("i" + row["A"].ToString());
+                            }
+                            //提出图标
                             this.imageListLarge.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
                             this.imageList1.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
                             //this.imageList1.Images.Add("i" + row["A"].ToString(),this.imageList1.Images[this.nowType+"2"]);
@@ -714,7 +727,7 @@ namespace Swift.ROM
                 }
                 else
                     lvi.ImageKey = (row["f"] == DBNull.Value) ? "FAV3" : "FAV2";
-			}
+            }
            
 			if (this.miViewGroups.Checked)
 			{
