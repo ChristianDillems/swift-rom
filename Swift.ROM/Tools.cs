@@ -111,5 +111,63 @@ namespace Swift.ROM
 			return Image.FromStream(ms);
 		}
 
+        public static Bitmap GetIcon(string nds)
+        {
+            string file = nds;
+
+            //如果为压缩文件，则需要进行解压
+            string[] ss = nds.Split('?');
+            if (ss.Length > 1)
+            {
+                Tools.unZIP(ss[0], Application.StartupPath + @"\TEMP\IconROM\");
+                file=Application.StartupPath + @"\TEMP\IconROM\" + ss[1];
+            }
+            
+            byte[] tile=new byte[512];
+            byte[] palette=new byte[32];
+
+            FileStream fs = new FileStream(file, FileMode.Open);
+            
+            fs.Seek(0x68, 0);
+            byte[] offset = new byte[4];
+            fs.Read(offset, 0, 4);
+            int os = offset[0] | offset[1] << 8 | offset[2] << 16 | offset[3] <<24;
+            fs.Seek(os+0x20,0);
+            fs.Read(tile,0, 512);
+            fs.Read(palette,0 , 32);
+
+            Color[] rgb32Palette = new Color[16];
+            rgb32Palette[0] = Color.Transparent;
+            for (int i = 1; i < 16; i++)
+            {
+                int rgb16 = palette[i*2] | palette[i*2+1] << 8;
+                rgb32Palette[i] = Color.FromArgb((rgb16 << 3) & 0xf8, (rgb16 >> 2) & 0xf8, (rgb16 >> 7) & 0xf8);
+            }
+
+           Bitmap bmp=new Bitmap(32,32);
+           bmp.MakeTransparent();
+
+            int nowPixel = 0;
+            for (int row = 0; row < 4; row++)
+                for (int col = 0; col < 4; col++)
+                    for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x += 2)
+                        {
+                            bmp.SetPixel(col * 8 + x + 1, row * 8 + y, rgb32Palette[(tile[nowPixel] & 0xf0) >> 4]);
+                            bmp.SetPixel(col * 8 + x + 0, row * 8 + y, rgb32Palette[(tile[nowPixel] & 0x0f) >> 0]);
+                            nowPixel++;
+                        }
+
+            fs.Close();
+
+            try
+            {
+                Directory.Delete(Application.StartupPath + "/TEMP/IconROM", true);
+            }
+            catch { }
+
+            return bmp;
+        }
+
 	}
 }

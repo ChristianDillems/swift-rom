@@ -189,6 +189,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Tools.cs" />
+    <Compile Include="UpdateIcon.cs" />
     <Compile Include="VerifyROM.cs" />
   </ItemGroup>
   <ItemGroup>

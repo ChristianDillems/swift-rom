@@ -23,8 +23,8 @@ namespace Swift.ROM
 
 		public void Start()
 		{
-		////	FormWait fw = new FormWait();
-		////	fw.Text= "正在重新检查ROM.....";
+		//	FormWait fw = new FormWait();
+		//	fw.Text= "正在重新检查ROM.....";
 
 			Debug.WriteLine("验证线程开始工作..."+formMain.nowType);
 

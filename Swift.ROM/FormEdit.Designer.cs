@@ -59,6 +59,7 @@
             this.dataColumn11 = new System.Data.DataColumn();
             this.dataColumn12 = new System.Data.DataColumn();
             this.dataColumn13 = new System.Data.DataColumn();
+            this.dataColumn15 = new System.Data.DataColumn();
             this.dataSet1 = new System.Data.DataSet();
             this.dataTableV = new System.Data.DataTable();
             this.dataColumn14 = new System.Data.DataColumn();
@@ -90,6 +91,7 @@
             this.textBoxVersion = new System.Windows.Forms.TextBox();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.buttonDeleteIcon = new System.Windows.Forms.Button();
+            this.buttonGetIcon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableV)).BeginInit();
@@ -101,7 +103,7 @@
             // 
             this.textBoxI.Location = new System.Drawing.Point(84, 322);
             this.textBoxI.Name = "textBoxI";
-            this.textBoxI.Size = new System.Drawing.Size(273, 21);
+            this.textBoxI.Size = new System.Drawing.Size(588, 21);
             this.textBoxI.TabIndex = 21;
             this.textBoxI.Validated += new System.EventHandler(this._Validated);
             // 
@@ -109,7 +111,7 @@
             // 
             this.textBoxE.Location = new System.Drawing.Point(84, 268);
             this.textBoxE.Name = "textBoxE";
-            this.textBoxE.Size = new System.Drawing.Size(273, 21);
+            this.textBoxE.Size = new System.Drawing.Size(634, 21);
             this.textBoxE.TabIndex = 17;
             this.textBoxE.Validated += new System.EventHandler(this._Validated);
             // 
@@ -269,7 +271,8 @@
             this.dataColumn10,
             this.dataColumn11,
             this.dataColumn12,
-            this.dataColumn13});
+            this.dataColumn13,
+            this.dataColumn15});
             this.dataTableR.TableName = "R";
             // 
             // dataColumn2
@@ -313,6 +316,11 @@
             // 
             this.dataColumn13.ColumnMapping = System.Data.MappingType.Attribute;
             this.dataColumn13.ColumnName = "H";
+            // 
+            // dataColumn15
+            // 
+            this.dataColumn15.ColumnMapping = System.Data.MappingType.Attribute;
+            this.dataColumn15.ColumnName = "i";
             // 
             // dataSet1
             // 
@@ -421,7 +429,7 @@
             this.textBoxUnInfo.Location = new System.Drawing.Point(363, 140);
             this.textBoxUnInfo.Multiline = true;
             this.textBoxUnInfo.Name = "textBoxUnInfo";
-            this.textBoxUnInfo.Size = new System.Drawing.Size(181, 149);
+            this.textBoxUnInfo.Size = new System.Drawing.Size(181, 122);
             this.textBoxUnInfo.TabIndex = 28;
             // 
             // buttonCancel
@@ -456,20 +464,20 @@
             this.textBoxOffline.Location = new System.Drawing.Point(551, 52);
             this.textBoxOffline.Multiline = true;
             this.textBoxOffline.Name = "textBoxOffline";
-            this.textBoxOffline.Size = new System.Drawing.Size(168, 231);
+            this.textBoxOffline.Size = new System.Drawing.Size(168, 156);
             this.textBoxOffline.TabIndex = 29;
             this.textBoxOffline.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxOffline_Validating);
             // 
             // textBoxImg1
             // 
-            this.textBoxImg1.Location = new System.Drawing.Point(550, 295);
+            this.textBoxImg1.Location = new System.Drawing.Point(551, 214);
             this.textBoxImg1.Name = "textBoxImg1";
             this.textBoxImg1.Size = new System.Drawing.Size(169, 21);
             this.textBoxImg1.TabIndex = 30;
             // 
             // textBoxImg2
             // 
-            this.textBoxImg2.Location = new System.Drawing.Point(550, 322);
+            this.textBoxImg2.Location = new System.Drawing.Point(551, 241);
             this.textBoxImg2.Name = "textBoxImg2";
             this.textBoxImg2.Size = new System.Drawing.Size(169, 21);
             this.textBoxImg2.TabIndex = 31;
@@ -568,16 +576,17 @@
             // pictureBoxIcon
             // 
             this.pictureBoxIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(374, 305);
+            this.pictureBoxIcon.Location = new System.Drawing.Point(678, 295);
             this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxIcon.Size = new System.Drawing.Size(40, 40);
+            this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxIcon.TabIndex = 41;
             this.pictureBoxIcon.TabStop = false;
             this.pictureBoxIcon.DoubleClick += new System.EventHandler(this.pictureBoxIcon_DoubleClick);
             // 
             // buttonDeleteIcon
             // 
-            this.buttonDeleteIcon.Location = new System.Drawing.Point(446, 314);
+            this.buttonDeleteIcon.Location = new System.Drawing.Point(516, 295);
             this.buttonDeleteIcon.Name = "buttonDeleteIcon";
             this.buttonDeleteIcon.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteIcon.TabIndex = 42;
@@ -585,11 +594,22 @@
             this.buttonDeleteIcon.UseVisualStyleBackColor = true;
             this.buttonDeleteIcon.Click += new System.EventHandler(this.buttonDeleteIcon_Click);
             // 
+            // buttonGetIcon
+            // 
+            this.buttonGetIcon.Location = new System.Drawing.Point(597, 295);
+            this.buttonGetIcon.Name = "buttonGetIcon";
+            this.buttonGetIcon.Size = new System.Drawing.Size(75, 23);
+            this.buttonGetIcon.TabIndex = 43;
+            this.buttonGetIcon.Text = "提取图标";
+            this.buttonGetIcon.UseVisualStyleBackColor = true;
+            this.buttonGetIcon.Click += new System.EventHandler(this.buttonGetIcon_Click);
+            // 
             // FormEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 525);
+            this.Controls.Add(this.buttonGetIcon);
             this.Controls.Add(this.buttonDeleteIcon);
             this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.textBoxVersion);
@@ -713,5 +733,7 @@
 		private System.Data.DataColumn dataColumn14;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.Button buttonDeleteIcon;
+        private System.Windows.Forms.Button buttonGetIcon;
+        private System.Data.DataColumn dataColumn15;
     }
 }

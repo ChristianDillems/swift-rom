@@ -25,6 +25,7 @@ namespace Swift.ROM
                 this.dataSet1.ReadXml(Application.StartupPath + "/Update-" + t + ".db");
             }
 
+            this.textBoxF.Text = f;
             this.textBoxA.Text = a;
 
             DataRow[] rows = this.dataTableR.Select("A='" + this.textBoxA.Text + "'");
@@ -85,8 +86,8 @@ namespace Swift.ROM
             }
 
             //看有没有图标,如果有则置为负数
-            if (this.pictureBoxIcon.Image != null)
-                m = -m;
+           // if (this.pictureBoxIcon.Image != null)
+             //   m = -m;
 
             row["A"] = this.textBoxA.Text.Trim();//SHA1
 			row["C"] = this.textBoxC.Text.Trim() == "" ? null : this.textBoxC.Text.Trim();//出品公司
@@ -98,7 +99,16 @@ namespace Swift.ROM
 			row["X"] = this.textBoxX.Text.Trim() == "" ? null : this.textBoxX.Text.Trim();//编号
 			row["Y"] = this.textBoxY.Text.Trim() == "" ? null : this.textBoxY.Text.Trim();//年份
 			row["T"] = this.textBoxT.Text.Trim() == "" ? null : this.textBoxT.Text.Trim();
-            row["u"] = (int)(DateTime.Now-(new DateTime(2008,1,1))).TotalMinutes;
+            if (this.pictureBoxIcon.Image == null)
+                row["i"] = DBNull.Value;
+            else
+            {
+                MemoryStream s = new MemoryStream();
+                this.pictureBoxIcon.Image.Save(s, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] b = s.GetBuffer();
+                row["i"] = Convert.ToBase64String(b);
+            }
+            row["u"] = (int)(DateTime.Now-(new DateTime(2008,1,1))).TotalSeconds;
             if (m == 2)
                 row["m"] = DBNull.Value;
             else
@@ -191,8 +201,14 @@ namespace Swift.ROM
 
             m = Math.Abs(m);
 
-            if (File.Exists(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png")) 
-                this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+            //if (File.Exists(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png")) 
+            //    this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+            if (rows[0]["i"] != DBNull.Value)
+            {
+                byte[] b = Convert.FromBase64String(rows[0]["i"].ToString());
+                MemoryStream stream = new MemoryStream(b);
+                this.pictureBoxIcon.Image = new Bitmap(stream);
+            }
 
 			for (int i = 1; i <= m; i++)
 			{
@@ -325,24 +341,23 @@ namespace Swift.ROM
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    File.Copy(this.openFileDialog1.FileName, Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
-                    File.Delete(this.openFileDialog1.FileName);
-                    this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                this.pictureBoxIcon.Image = Tools.GetImage(this.openFileDialog1.FileName);
             }
         }
 
         private void buttonDeleteIcon_Click(object sender, EventArgs e)
         {
             this.pictureBoxIcon.Image = null;
-            File.Delete(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+         //   File.Delete(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
         }
+
+        private void buttonGetIcon_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp = Tools.GetIcon(this.textBoxF.Text);
+            this.pictureBoxIcon.Image = bmp;
+          //  bmp.Save(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
+        }
+
 
     }
 }

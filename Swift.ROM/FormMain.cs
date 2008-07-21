@@ -52,6 +52,7 @@ namespace Swift.ROM
         private FormDownload fd;
 
 		private Thread verifyThread;
+        public Thread iconThread;
 
         #region 从升级文件中升级
         private void update(string type)
@@ -169,17 +170,18 @@ namespace Swift.ROM
 					row = rows[0];
                 }
 
-				row["A"] = xe.GetAttribute("A") == "" ? null : xe.GetAttribute("A"); ;
-				row["X"] = xe.GetAttribute("X") == "" ? null : xe.GetAttribute("X"); ;
-				row["N"] = xe.GetAttribute("N") == "" ? null : xe.GetAttribute("N"); ;
-				row["E"] = xe.GetAttribute("E") == "" ? null : xe.GetAttribute("E"); ;
-				row["T"] = xe.GetAttribute("T") == "" ? null : xe.GetAttribute("T"); ;
-				row["L"] = xe.GetAttribute("L") == "" ? null : xe.GetAttribute("L"); ;
-				row["Y"] = xe.GetAttribute("Y") == "" ? null : xe.GetAttribute("Y"); ;
-				row["S"] = xe.GetAttribute("S") == "" ? null : xe.GetAttribute("S"); ;
-				row["C"] = xe.GetAttribute("C") == "" ? null : xe.GetAttribute("C"); ;
-				row["I"] = xe.GetAttribute("I") == "" ? null : xe.GetAttribute("I"); ;
+				row["A"] = xe.GetAttribute("A") == "" ? null : xe.GetAttribute("A"); 
+				row["X"] = xe.GetAttribute("X") == "" ? null : xe.GetAttribute("X"); 
+				row["N"] = xe.GetAttribute("N") == "" ? null : xe.GetAttribute("N"); 
+				row["E"] = xe.GetAttribute("E") == "" ? null : xe.GetAttribute("E"); 
+				row["T"] = xe.GetAttribute("T") == "" ? null : xe.GetAttribute("T"); 
+				row["L"] = xe.GetAttribute("L") == "" ? null : xe.GetAttribute("L"); 
+				row["Y"] = xe.GetAttribute("Y") == "" ? null : xe.GetAttribute("Y"); 
+				row["S"] = xe.GetAttribute("S") == "" ? null : xe.GetAttribute("S"); 
+				row["C"] = xe.GetAttribute("C") == "" ? null : xe.GetAttribute("C"); 
+				row["I"] = xe.GetAttribute("I") == "" ? null : xe.GetAttribute("I"); 
 				row["H"] = xe.GetAttribute("H") == "" ? null : xe.GetAttribute("H");
+                row["i"] = xe.GetAttribute("i") == "" ? null : xe.GetAttribute("i");
 				if (xe.GetAttribute("m") == "" || xe.GetAttribute("m") == "2")
 					row["m"] = DBNull.Value;
 				else
@@ -511,18 +513,17 @@ namespace Swift.ROM
 			string nowItem = (this.listView.SelectedItems.Count > 0) ? this.listView.SelectedItems[0].Tag.ToString() : null;
 
             this.listView.BeginUpdate();
+     //       this.listView.SmallImageList = null;
 
             //清除现有信息
             this.listView.Items.Clear();
             this.listView.Groups.Clear();
 
-            foreach (string s in this.imageList1.Images.Keys)
+            //移出自定义图标
+            for (int i = 12; i < this.imageList1.Images.Count; i++)
             {
-                if (s.StartsWith("i"))
-                {
-                    this.imageList1.Images.RemoveByKey(s);
-                    this.imageListLarge.Images.RemoveByKey(s);
-                }
+                this.imageList1.Images.RemoveAt(i);
+                this.imageList2.Images.RemoveAt(i);
             }
 
             //创建分组
@@ -625,15 +626,65 @@ namespace Swift.ROM
             this.labelMessage.Text = "Ready.";
 
             //this.fw.Hide();
-            //this.timerHideFw.Start();
             fw.Close();
+            Application.DoEvents();
+
+                 //开始线程之前，先确认原来的线程已经结束。
+            if (this.iconThread != null) this.iconThread.Abort();
+            while (this.iconThread != null && this.iconThread.ThreadState != System.Threading.ThreadState.Stopped)
+                Application.DoEvents();
+           
+            //重写图标
+            if (this.nowType == "NDS")
+            {
+                //填充图标
+
+                //声明ROM验证线程
+                //	说明：原来没有单独的线程用于ROM验证，造成在验证的时候没办法进行相应的其他操作，
+                //        加上这个线程以后ROM识别和软件的使用就可以相对分离了。
+                UpdateIcon uIcon = new UpdateIcon(this);
+                this.iconThread = new Thread(new ThreadStart(uIcon.Start));
+                this.iconThread.IsBackground = true;
+                this.iconThread.Priority = ThreadPriority.Lowest;
+                this.iconThread.Start();
+
+                //Debug.WriteLine("重写图标");
+                //System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
+                //float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
+                //Graphics g = null;
+                //Bitmap img;
+                //foreach (ListViewItem lvi in this.listView.Items)
+                //{
+                //    Application.DoEvents();
+
+                //    DataRow[] rows = this.dataTableR.Select("A='" + lvi.Tag.ToString() + "' and i is not null");
+                //    if (rows.Length == 0) continue;
+
+                //    img = new Bitmap(new MemoryStream(Convert.FromBase64String(rows[0]["i"].ToString())));
+
+                //    if (rows[0]["f"] == DBNull.Value)
+                //    {
+                //        g = Graphics.FromImage(img);
+                //        ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
+                //        g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+                //    }
+
+                //    Debug.WriteLine("old=" + lvi.ImageIndex.ToString());
+
+                //    this.imageList1.Images.Add(img);
+                //    this.imageList2.Images.Add(img);
+                //    lvi.ImageIndex = this.imageList1.Images.Count - 1;
+
+                //    Debug.WriteLine("new=" + this.imageList1.Images.Count.ToString());
+                //}
+            }
 
 			//自动验证所有ROM
-			if (this.autoVerify)
-				this.miVerifyROM_Click(null, null);
-				//this.miVerifyROM.PerformClick();
+            if (this.autoVerify) 
+                this.miVerifyROM_Click(null, null);
+                //this.miVerifyROM.PerformClick();
 		}
-		
+
 		public void updateLVI(DataRow row, Boolean insert,Boolean reSUM)
 		{
 			ListViewItem lvi=null;
@@ -643,7 +694,6 @@ namespace Swift.ROM
 					if (tlvi.Tag.ToString() == row["A"].ToString() || tlvi.Tag.ToString()==row["I"].ToString())
 					{
 						lvi = tlvi;
-						Application.DoEvents();
 						break;
 					}
 			
@@ -679,50 +729,53 @@ namespace Swift.ROM
                     string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
                     if (row["f"] == DBNull.Value)
                     {
-                        if (File.Exists(fi))
-                        {
-                            //清除以前图标
-                            if (this.imageList1.Images["i" + row["A"].ToString()] != null)
-                            {
-                                this.imageList1.Images.RemoveByKey("i" + row["A"].ToString());
-                                this.imageListLarge.Images.RemoveByKey("i" + row["A"].ToString());
-                            }
-
-                            //提出图标,并置黑白
-                            Bitmap currentBitmap = new Bitmap(Tools.GetImage(fi));
-                            Graphics g = Graphics.FromImage(currentBitmap);
-                            float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
-                            System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
-                            ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
-                            g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
-                            g.Dispose();
-
-                            this.imageListLarge.Images.Add("i" + row["A"].ToString(), currentBitmap);
-                            this.imageList1.Images.Add("i" + row["A"].ToString(), currentBitmap);
-                            //this.imageList1.Images.Add("i" + row["A"].ToString(),this.imageList1.Images[this.nowType+"2"]);
-                            lvi.ImageKey = "i" + row["A"].ToString();
-                        }
-                        else
+          //              if (row.IsNull("i"))
                             lvi.ImageKey = this.nowType + "3";
+          //              else
+          //              {
+                            //提出图标,并置黑白
+          //                  Bitmap currentBitmap = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
+
+          //                  Graphics g = Graphics.FromImage(currentBitmap);
+          //                  float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
+          //                  System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
+          //                  ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
+          //                  g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
+          //                  g.Dispose();
+
+          //                  if (lvi.ImageIndex > -1)
+          //                      this.imageList1.Images[lvi.ImageIndex] = currentBitmap;
+          //                  else
+          //                  {
+                                //this.imageList1.Images.Add("i"+row["A"].ToString(),currentBitmap);
+          //                      this.imageList1.Images.Add(currentBitmap);
+          //                      this.imageList2.Images.Add(currentBitmap); 
+          //                      lvi.ImageIndex = this.imageList1.Images.Count-1;
+                              //  lvi.ImageKey = "i" + row["A"].ToString();
+          //                 }
+          //              }
                     }
                     else
                     {
-                        if (File.Exists(fi))
-                        {
-                            //清除以前图标
-                            if (this.imageList1.Images["i" + row["A"].ToString()] != null)
-                            {
-                                this.imageList1.Images.RemoveByKey("i" + row["A"].ToString());
-                                this.imageListLarge.Images.RemoveByKey("i" + row["A"].ToString());
-                            }
-                            //提出图标
-                            this.imageListLarge.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
-                            this.imageList1.Images.Add("i" + row["A"].ToString(), Tools.GetImage(fi));
-                            //this.imageList1.Images.Add("i" + row["A"].ToString(),this.imageList1.Images[this.nowType+"2"]);
-                            lvi.ImageKey = "i" + row["A"].ToString();
-                        }
-                        else
+        //                if (row.IsNull("i"))//File.Exists(fi))
+                        //lvi.ImageIndex = 2;
                             lvi.ImageKey = this.nowType + "2";
+        //                else
+        //                {
+                            
+                            //提出图标
+        //                    Image img = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
+        //                    if (lvi.ImageIndex > -1)
+        //                        this.imageList1.Images[lvi.ImageIndex] = img;
+        //                    else
+        //                    {
+                                //this.imageList1.Images.Add("i"+row["A"].ToString(),img);
+        //                        this.imageList1.Images.Add(img);
+        //                        this.imageList2.Images.Add(img); 
+        //                        lvi.ImageIndex = this.imageList1.Images.Count-1;
+        //                       // lvi.ImageKey = "i" + row["A"].ToString();
+        //                    }
+        //                }
                     }
                 }
                 else
@@ -757,8 +810,6 @@ namespace Swift.ROM
 
 			if(insert) this.listView.Items.Add(lvi);
 			
-		//	Application.DoEvents();
-
 			//更新右下角的数量
 			if (reSUM)
 			{
@@ -782,6 +833,39 @@ namespace Swift.ROM
 				this.labelUnknow.Text = this.dataTableR.Select("A is null and f is not null").Length.ToString();
 			}
 		}
+
+        public void updateIcon(DataRow row)
+        {
+            ListViewItem lvi = null;
+
+            foreach (ListViewItem tlvi in this.listView.Items)
+                if (tlvi.Tag.ToString() == row["A"].ToString() )
+                {
+                    lvi = tlvi;
+                    break;
+                }
+            if (lvi == null) return;
+            if (lvi.ImageIndex > -1) return;
+
+            //提出图标,并置黑白
+            Bitmap img = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
+
+            if (row["f"] == DBNull.Value)
+            {
+                Graphics g = Graphics.FromImage(img);
+                float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
+                System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
+                ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+                g.Dispose();
+            }
+
+            this.imageList1.Images.Add(img);
+            this.imageList2.Images.Add(img);
+            lvi.ImageIndex = this.imageList1.Images.Count - 1;
+
+            Application.DoEvents();
+        }
 
         private void miSetup_Click(object sender, EventArgs e)
         {
@@ -827,7 +911,7 @@ namespace Swift.ROM
 				return;
 			}
 
-			FormEdit f = new FormEdit(this.nowType, this.listView.SelectedItems[0].Tag.ToString(), rows[0]["E"].ToString() , rows[0]["S"].ToString() );
+			FormEdit f = new FormEdit(this.nowType, this.listView.SelectedItems[0].Tag.ToString(), rows[0]["f"].ToString() , rows[0]["S"].ToString() );
 			if (f.ShowDialog() == DialogResult.OK)
 			{
 				//保存当前ROM数据
@@ -854,9 +938,10 @@ namespace Swift.ROM
         {
 			//开始线程之前，先确认原来的线程已经结束。
 			this.waitThreadStop();
-
+            
 			//声明ROM验证线程
-			//	说明：原来没有单独的线程用于ROM验证，造成在验证的时候没办法进行相应的其他操作，加上这个线程以后ROM识别和软件的使用就可以相对分离了。
+			//	说明：原来没有单独的线程用于ROM验证，造成在验证的时候没办法进行相应的其他操作，
+            //        加上这个线程以后ROM识别和软件的使用就可以相对分离了。
 			VerifyROM verifyROM = new VerifyROM(this);
 			this.verifyThread = new Thread(new ThreadStart(verifyROM.Start));
 			this.verifyThread.IsBackground = true;
@@ -975,8 +1060,9 @@ namespace Swift.ROM
 				if(!rows[0].IsNull("m"))
 					m = (int)this.dataTableR.Select("A='" + lvi.Tag.ToString() + "'")[0]["m"];
                 //检测是否有图标,如果有图标而没有下载,则进行下载
-                if (this.autoDownload && m < 0 && !File.Exists(fs + "_00.png"))
-                    fd.download(fn + "_00.png");
+                if (File.Exists(fs + "_00.png")) File.Delete(fs + "_00.png");
+                //if (this.autoDownload && m < 0 && !File.Exists(fs + "_00.png"))
+                //    fd.download(fn + "_00.png");
                 m = Math.Abs(m);
 
                 //关于图片重新组织存储格式,原来单目录存储改为现在的 0xff 格式目录存储
