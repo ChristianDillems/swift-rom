@@ -32,7 +32,7 @@ namespace Swift.ROM
         private void timer2_Tick(object sender, EventArgs e)
         {
             Debug.WriteLine("Opacity="+this.Opacity);
-            this.Opacity-=0.1;
+            this.Opacity-=0.2;
             Application.DoEvents();
             if (this.Opacity == 0)
             {

@@ -197,18 +197,16 @@ namespace Swift.ROM
 					m = (int)rows[0]["m"];
 				}
 				catch { }
-			}
+
+                if (!rows[0].IsNull("i"))
+                {
+                    byte[] b = Convert.FromBase64String(rows[0]["i"].ToString());
+                    MemoryStream stream = new MemoryStream(b);
+                    this.pictureBoxIcon.Image = new Bitmap(stream);
+                }
+            }
 
             m = Math.Abs(m);
-
-            //if (File.Exists(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png")) 
-            //    this.pictureBoxIcon.Image = Tools.GetImage(Application.StartupPath + "/" + this.textBoxType.Text + "/" + this.textBoxA.Text.Substring(0, 2) + "/" + this.textBoxA.Text + "_00.png");
-            if (rows[0]["i"] != DBNull.Value)
-            {
-                byte[] b = Convert.FromBase64String(rows[0]["i"].ToString());
-                MemoryStream stream = new MemoryStream(b);
-                this.pictureBoxIcon.Image = new Bitmap(stream);
-            }
 
 			for (int i = 1; i <= m; i++)
 			{

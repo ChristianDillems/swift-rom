@@ -302,7 +302,7 @@
             this.listView.LargeImageList = this.imageList2;
             this.listView.Name = "listView";
             this.listView.SmallImageList = this.imageList1;
-            this.listView.TileSize = new System.Drawing.Size(240, 40);
+            this.listView.TileSize = new System.Drawing.Size(480, 40);
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);

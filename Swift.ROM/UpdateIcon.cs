@@ -28,6 +28,8 @@ namespace Swift.ROM
                     formMain.listView.Invoke(cb, new object[] { row });
                 }
                 catch { break; }
+
+            //    System.Windows.Forms.Application.DoEvents();
             }
         }
     }

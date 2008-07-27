@@ -726,7 +726,7 @@ namespace Swift.ROM
             {
                 if (row.IsNull("F"))
                 {
-                    string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
+          //          string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
                     if (row["f"] == DBNull.Value)
                     {
           //              if (row.IsNull("i"))
@@ -781,7 +781,7 @@ namespace Swift.ROM
                 else
                     lvi.ImageKey = (row["f"] == DBNull.Value) ? "FAV3" : "FAV2";
             }
-           
+
 			if (this.miViewGroups.Checked)
 			{
 				if (this.miViewGroupC.Checked)   //出品公司
@@ -809,7 +809,7 @@ namespace Swift.ROM
 			}
 
 			if(insert) this.listView.Items.Add(lvi);
-			
+
 			//更新右下角的数量
 			if (reSUM)
 			{
@@ -832,6 +832,9 @@ namespace Swift.ROM
 				}
 				this.labelUnknow.Text = this.dataTableR.Select("A is null and f is not null").Length.ToString();
 			}
+
+            if (!insert && this.nowType == "NDS" && !row.IsNull("i"))
+                this.updateIcon(row);
 		}
 
         public void updateIcon(DataRow row)
@@ -847,10 +850,10 @@ namespace Swift.ROM
             if (lvi == null) return;
             if (lvi.ImageIndex > -1) return;
 
-            //提出图标,并置黑白
+            //提出图标
             Bitmap img = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
 
-            if (row["f"] == DBNull.Value)
+            if (row["f"] == DBNull.Value) //置黑白
             {
                 Graphics g = Graphics.FromImage(img);
                 float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
@@ -1483,39 +1486,72 @@ namespace Swift.ROM
 
 		private void timerState_Tick(object sender, EventArgs e)
 		{
-			if (this.verifyThread == null)
-				return;
+            if (this.verifyThread != null)
+            {
+                this.miVerifyROM.Enabled = (this.verifyThread.ThreadState == System.Threading.ThreadState.Stopped);
+                this.miStopVerifyROM.Enabled = !this.miVerifyROM.Enabled;
 
-			this.miVerifyROM.Enabled = (this.verifyThread.ThreadState == System.Threading.ThreadState.Stopped);
-			this.miStopVerifyROM.Enabled = !this.miVerifyROM.Enabled;
+                if (this.verifyThread.ThreadState == System.Threading.ThreadState.Stopped)
+                {
+                    this.verifyThread = null;
+                    this.verifyThreadImg = 0;
+                    if (this.iconThread != null) return;
+                    this.toolStripStatusLabelState.Text = null;
+                    this.toolStripStatusLabelState.ToolTipText = null;
+                    this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr0;
+                    this.timerState.Interval = 1000;
+                }
+                else
+                {
+                    if (this.verifyThreadImg == 0)
+                    {
+                        this.toolStripStatusLabelState.Text = "Verifying ROM...";
+                        this.timerState.Interval = 100;
+                    }
 
-			if (this.verifyThread.ThreadState == System.Threading.ThreadState.Stopped)
-			{
-				this.toolStripStatusLabelState.Text = null;
-				this.toolStripStatusLabelState.ToolTipText = null;
-				this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr0;
-				this.verifyThreadImg = 0;
-				this.timerState.Interval = 1000;
-			}
-			else
-			{
-				if (this.verifyThreadImg == 0)
-				{
-					this.toolStripStatusLabelState.Text = "Verifying ROM...";
-					this.timerState.Interval = 100;
-				}
+                    switch (verifyThreadImg)
+                    {
+                        case 1: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr1; break;
+                        case 2: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr2; break;
+                        case 3: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr3; break;
+                        case 4: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr4; break;
+                        case 5: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr5; break;
+                        case 6: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr6; break;
+                    }
+                    if (verifyThreadImg++ >= 6) verifyThreadImg = 1;
+                }
+            }
+            else if (this.iconThread != null)
+            {
+                if (this.iconThread.ThreadState == System.Threading.ThreadState.Stopped)
+                {
+                    this.iconThread = null;
+                    this.toolStripStatusLabelState.Text = null;
+                    this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr0;
+                    this.verifyThreadImg = 0;
+                    this.timerState.Interval = 1000;
+                }
+                else
+                {
+                    if (this.verifyThreadImg == 0)
+                    {
+                        this.toolStripStatusLabelState.Text = "Loading icon...";
+                        this.timerState.Interval = 100;
+                    }
 
-				switch (verifyThreadImg)
-				{
-					case 1:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr1;break;
-					case 2:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr2;break;
-					case 3:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr3;break;
-					case 4:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr4;break;
-					case 5:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr5;break;
-					case 6:this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr6;break;
-				}
-				if (verifyThreadImg++ >= 6) verifyThreadImg = 1;
-			}
+                    switch (verifyThreadImg)
+                    {
+                        case 1: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr1; break;
+                        case 2: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr2; break;
+                        case 3: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr3; break;
+                        case 4: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr4; break;
+                        case 5: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr5; break;
+                        case 6: this.toolStripStatusLabelState.Image = global::Swift.ROM.Properties.Resources.vr6; break;
+                    }
+                    if (verifyThreadImg++ >= 6) verifyThreadImg = 1;
+                }
+     
+            }
 		}
 
 		private void miStopVerifyROM_Click(object sender, EventArgs e)
