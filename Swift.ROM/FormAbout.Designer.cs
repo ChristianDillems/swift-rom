@@ -40,73 +40,48 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.AccessibleDescription = null;
-            this.groupBox1.AccessibleName = null;
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.BackgroundImage = null;
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Font = null;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // textBox1
             // 
-            this.textBox1.AccessibleDescription = null;
-            this.textBox1.AccessibleName = null;
             resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.BackgroundImage = null;
-            this.textBox1.Font = null;
             this.textBox1.Name = "textBox1";
             // 
             // labelVersion
             // 
-            this.labelVersion.AccessibleDescription = null;
-            this.labelVersion.AccessibleName = null;
             resources.ApplyResources(this.labelVersion, "labelVersion");
-            this.labelVersion.Font = null;
             this.labelVersion.Name = "labelVersion";
             // 
             // buttonClose
             // 
-            this.buttonClose.AccessibleDescription = null;
-            this.buttonClose.AccessibleName = null;
             resources.ApplyResources(this.buttonClose, "buttonClose");
-            this.buttonClose.BackgroundImage = null;
-            this.buttonClose.Font = null;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // label1
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
             // label2
             // 
-            this.label2.AccessibleDescription = null;
-            this.label2.AccessibleName = null;
             resources.ApplyResources(this.label2, "label2");
-            this.label2.Font = null;
             this.label2.Name = "label2";
             // 
             // FormAbout
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.label1);
-            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAbout";

@@ -726,56 +726,13 @@ namespace Swift.ROM
             {
                 if (row.IsNull("F"))
                 {
-          //          string fi = Application.StartupPath + "/" + this.nowType + "/" + row["a"].ToString().Substring(0, 2) + "/" + row["A"].ToString() + "_00.png";
                     if (row["f"] == DBNull.Value)
                     {
-          //              if (row.IsNull("i"))
-                            lvi.ImageKey = this.nowType + "3";
-          //              else
-          //              {
-                            //提出图标,并置黑白
-          //                  Bitmap currentBitmap = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
-
-          //                  Graphics g = Graphics.FromImage(currentBitmap);
-          //                  float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
-          //                  System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
-          //                  ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
-          //                  g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
-          //                  g.Dispose();
-
-          //                  if (lvi.ImageIndex > -1)
-          //                      this.imageList1.Images[lvi.ImageIndex] = currentBitmap;
-          //                  else
-          //                  {
-                                //this.imageList1.Images.Add("i"+row["A"].ToString(),currentBitmap);
-          //                      this.imageList1.Images.Add(currentBitmap);
-          //                      this.imageList2.Images.Add(currentBitmap); 
-          //                      lvi.ImageIndex = this.imageList1.Images.Count-1;
-                              //  lvi.ImageKey = "i" + row["A"].ToString();
-          //                 }
-          //              }
+                           lvi.ImageKey = this.nowType + "3";
                     }
                     else
                     {
-        //                if (row.IsNull("i"))//File.Exists(fi))
-                        //lvi.ImageIndex = 2;
                             lvi.ImageKey = this.nowType + "2";
-        //                else
-        //                {
-                            
-                            //提出图标
-        //                    Image img = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
-        //                    if (lvi.ImageIndex > -1)
-        //                        this.imageList1.Images[lvi.ImageIndex] = img;
-        //                    else
-        //                    {
-                                //this.imageList1.Images.Add("i"+row["A"].ToString(),img);
-        //                        this.imageList1.Images.Add(img);
-        //                        this.imageList2.Images.Add(img); 
-        //                        lvi.ImageIndex = this.imageList1.Images.Count-1;
-        //                       // lvi.ImageKey = "i" + row["A"].ToString();
-        //                    }
-        //                }
                     }
                 }
                 else
@@ -852,6 +809,14 @@ namespace Swift.ROM
 
             //提出图标
             Bitmap img = new Bitmap(new MemoryStream(Convert.FromBase64String(row["i"].ToString())));
+
+            //收藏
+            if (!row.IsNull("F"))
+            {
+                Graphics g = Graphics.FromImage(img);
+                g.DrawImage(this.imageList1.Images["FAV1"], 16, 16);
+                g.Dispose();
+            }
 
             if (row["f"] == DBNull.Value) //置黑白
             {

@@ -1250,5 +1250,55 @@
   <R A="4635BF4C272F0985C1B79931DA708AC383D13896" T="ACT" N="恶魔城II - 西蒙的寻找 (美)[T+Swe1.0_TheTranslator]" E="Castlevania II - Simon's Quest (U)[T+Swe1.0_TheTranslator]" L="sw" Y="1998" S="256K" C="KONAMI" u="2008-06-03T22:32:37.1281961+08:00" H="1" />
   <R A="B595E14E76504FC29CF63768870E1E723CDF02F7" T="ACT" N="恶魔城II - 西蒙的寻找 (美)[T-Rus]" E="Castlevania II - Simon's Quest (U)[T-Rus]" L="ru" Y="2000" S="256K" C="KONAMI" u="2008-06-03T22:33:34.4174981+08:00" H="1" />
   <R A="3539BBC83973A3B15FEEB545793A4DB4616A4942" T="ACT" N="恶魔城II - 西蒙的寻找 (美)[T-Spa]" E="Castlevania II - Simon's Quest (U)[T-Spa]" L="sp" Y="1988" S="256K" C="KONAMI" u="2008-06-03T22:33:53.4455771+08:00" H="1" />
+  <R A="CB50FE506FC18C8E9B86491739418FD10545BA2D" T="RPG" N="魔士道阴谋 (中)" E="Mo Dao Shi Yin Mou (Unl)" L="CH" Y="2001" S="512K" C="WaiXing" u="18820851" />
+  <R A="8F04B649B244BCC8D21D6986D9DAF8062F063C3E" T="RPG" N="魔道士阴谋 (中)[a1]" E="Mo Dao Shi Yin Mou (Unl)[a1]" L="CH" Y="2001" S="384K" C="WaiXing" u="18820845" H="1" />
+  <R A="137DD893A51C899436AB3B2015C1918D40E39633" T="RPG" N="魔道士阴谋 (中)[b1]" E="Mo Dao Shi Yin Mou (Unl)[b1]" L="CH" Y="2001" S="512K" C="WaiXing" u="18820867" H="1" />
+  <R A="989B9B20A1D47FC1086E444F53D3F890A63B6D38" T="ACT" N="超级马里奥兄弟2 (欧)" E="Super Mario Bros. 2 (E)[!]" L="EN" Y="1988" S="256K" C="Nintendo" u="18822189" />
+  <R A="EC9994D48B7D108F723B291945106C553245792C" T="ACT" N="超级马里奥兄弟2 (欧)[p1]" E="Super Mario Bros. 2 (E)[p1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18822248" H="2" />
+  <R A="7DF0F595B074F587C6A1D8F47E031F045D540DAE" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[!]" E="Super Mario Bros. 2 (U)(PRG0)[!]" L="EN" Y="1988" S="256K" C="Nintendo" u="18822455" />
+  <R A="C620B37CC6DDC24F4BADD12E7D82EF931A6E9B73" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b1]" E="Super Mario Bros. 2 (U)(PRG0)[b1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18822527" H="2" />
+  <R A="FB5A37CA37673996E21539EB3C6314DB4FBF7D02" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b1][T+Gre1.0_Giama]" E="Super Mario Bros. 2 (U)(PRG0)[b1][T+Gre1.0_Giama]" L="de" Y="1988" S="256K" C="Nintendo" u="18822900" H="2" />
+  <R A="61952273947C9DC8CA45663D6CB6593D92275E9A" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b1][T+Pol1.04]" E="Super Mario Bros. 2 (U)(PRG0)[b1][T+Pol1.04]" L="po" Y="1988" S="256K" C="Nintendo" u="18822874" H="1" />
+  <R A="755E2F61AE39B9DA968452225DE022147BCEFD9F" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b1][T+Por]" E="Super Mario Bros. 2 (U)(PRG0)[b1][T+Por]" L="po" Y="1988" S="256K" C="Nintendo" u="18822983" H="1" />
+  <R A="B287A78AA383FA42A0AE9C782E054A90111B3CAA" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b2]" E="Super Mario Bros. 2 (U)(PRG0)[b2]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823122" H="2" />
+  <R A="31EBFCCA11DA42962F68E6872AF7DCCD046A6572" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b3]" E="Super Mario Bros. 2 (U)(PRG0)[b3]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823128" H="2" />
+  <R A="E36CEF4E2F71FE961CE26052AB34C1E268DF793A" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b4]" E="Super Mario Bros. 2 (U)(PRG0)[b4]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823243" H="2" />
+  <R A="88A56DCEF030281853FB54A5A68D996B3531E089" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b5]" E="Super Mario Bros. 2 (U)(PRG0)[b5]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823309" H="2" />
+  <R A="06FA3EB3B32E46584B1B63AA9975A13C4A7A464C" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b6]" E="Super Mario Bros. 2 (U)(PRG0)[b6]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823375" H="2" />
+  <R A="71828F0C992C024AF5484166FCB8CE0C3F0A233D" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b7]" E="Super Mario Bros. 2 (U)(PRG0)[b7]" L="EN" Y="1988" S="204K" C="Nintendo" u="18823412" H="2" />
+  <R A="ED4529CA4AD98C519EAC215ECBC09E55F7C37FE9" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b8]" E="Super Mario Bros. 2 (U)(PRG0)[b8]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823546" H="2" />
+  <R A="D791908433FBA3D242963753B8CE3F5454065E48" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[b9]" E="Super Mario Bros. 2 (U)(PRG0)[b9]" L="EN" Y="1988" S="256K" C="Nintendo" u="18823990" H="1" />
+  <R A="B02EB3F7A1F1A106D325F1DBDCF87D361CF95AB5" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[h1]" E="Super Mario Bros. 2 (U)(PRG0)[h1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18824104" H="1" />
+  <R A="1D15D94D4D6BDB664BDF68307204D4A991195367" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[h1][o1]" E="Super Mario Bros. 2 (U)(PRG0)[h1][o1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18824168" H="2" />
+  <R A="6DE4376A7A3FCBF2B63447D3AF436F0287F7DC96" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[h2][o1]" E="Super Mario Bros. 2 (U)(PRG0)[h2][o1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18824555" H="2" />
+  <R A="B28DD1AA46E75AFE78C8E3FEEE44B77B54EBBF3B" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[o1]" E="Super Mario Bros. 2 (U)(PRG0)[o1]" L="EN" Y="1988" S="256K" C="Nintendo" u="18824630" H="1" />
+  <R A="51E8D387FF2CADF3CD9A77C728DEA0AFB29F6534" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[o1][T+Gre1.0_Giama][b1]" E="Super Mario Bros. 2 (U)(PRG0)[o1][T+Gre1.0_Giama][b1]" L="de" Y="1988" S="256K" C="Nintendo" u="18824683" H="2" />
+  <R A="760B620D2437955519E6CFD7AF5328B720FD6DD8" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[o2]" E="Super Mario Bros. 2 (U)(PRG0)[o2]" L="EN" Y="1988" S="256K" C="Nintendo" u="18824735" H="1" />
+  <R A="268914B93A83C8CDA6152A5075910C5C1CD529A5" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Dut1.0_OK Impala!]" E="Super Mario Bros. 2 (U)(PRG0)[T+Dut1.0_OK Impala!]" L="du" Y="2003" S="256K" C="Nintendo" u="18824816" H="1" />
+  <R A="0181034B0F2D83BC4BEF25151EC7BE878F9F18A7" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Fre100%_arkames]" E="Super Mario Bros. 2 (U)(PRG0)[T+Fre100%_arkames]" L="fr" Y="1988" S="256K" C="Nintendo" u="18824921" H="1" />
+  <R A="93A6E3F1340A509A6A03AC78478D759B9CB8F28E" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Fre_Sylfurd]" E="Super Mario Bros. 2 (U)(PRG0)[T+Fre_Sylfurd]" L="fr" Y="1988" S="256K" C="Nintendo" u="18824983" H="1" />
+  <R A="B093E591ADDEA1814058A0AD3F4D366D90705FAD" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Ger100]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ger100]" L="de" Y="1988" S="256K" C="Nintendo" u="18825037" H="1" />
+  <R A="B121E2DC84F58B62FD5A2F0E91E68C98AEFB8C4B" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Gre1.0_Giama]" E="Super Mario Bros. 2 (U)(PRG0)[T+Gre1.0_Giama]" L="de" Y="1988" S="256K" C="Nintendo" u="18825120" H="1" />
+  <R A="E5A340E50741E2027DD806A94586B500D928C739" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Ita1.0_SadNES_City]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ita1.0_SadNES_City]" L="it" Y="1988" S="256K" C="Nintendo" u="18825197" H="1" />
+  <R A="C2A5A8A0DB04C682BFAE31CE1AD493546EA3EDC4" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Ita1.0_Tuccio]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ita1.0_Tuccio]" L="it" Y="2002" S="256K" C="Nintendo" u="18825266" H="1" />
+  <R A="35EEB04202E76AFEB1228C2AC142773DB307AAB7" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Ita1.0_Zombikiller]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ita1.0_Zombikiller]" L="it" Y="2001" S="256K" C="Nintendo" u="18825581" H="1" />
+  <R A="91C2538522FE7841C81982F012458019C096D54B" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Nor1.0_EiRiK]" E="Super Mario Bros. 2 (U)(PRG0)[T+Nor1.0_EiRiK]" L="no" Y="2001" S="256K" C="Nintendo" u="18825631" H="1" />
+  <R A="F26720F0C88F94708A5B39CD03B582D9D81432F4" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Pol1.04]" E="Super Mario Bros. 2 (U)(PRG0)[T+Pol1.04]" L="po" Y="1988" S="256K" C="Nintendo" u="18826863" H="1" />
+  <R A="A5D8EA9E31DF96DA34E649CA21D6939FF8C01D2D" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Por]" E="Super Mario Bros. 2 (U)(PRG0)[T+Por]" L="po" Y="1999" S="256K" C="Nintendo" u="18826905" H="1" />
+  <R A="BBC923F52E795097425FF12758432F9EE2EBFF8F" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Rus]" E="Super Mario Bros. 2 (U)(PRG0)[T+Rus]" L="ru" Y="1988" S="256K" C="Nintendo" u="18826944" H="1" />
+  <R A="06E1B1B13934A3355D5507B690FC6CA6FA093412" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Spa_PaladingKnights]" E="Super Mario Bros. 2 (U)(PRG0)[T+Spa_PaladingKnights]" L="sp" Y="1988" S="256K" C="Nintendo" u="18827009" H="1" />
+  <R A="D0541EB370FD33B8414FDDF2325E68A3024F68D7" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Swe1.0_TheTranslator]" E="Super Mario Bros. 2 (U)(PRG0)[T+Swe1.0_TheTranslator]" L="sw" Y="1988" S="256K" C="Nintendo" u="18827067" H="1" />
+  <R A="2D07F27D4DBF86168E41E801A2B77D77A1AB5A6C" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Swe1.0_TheTranslator][a1]" E="Super Mario Bros. 2 (U)(PRG0)[T+Swe1.0_TheTranslator][a1]" L="sw" Y="1988" S="256K" C="Nintendo" u="18827187" H="1" />
+  <R A="5EBB4EBE06997E419F7E08EF963100B8BD41F0CC" T="ACT" N="超级马里奥兄弟2 (美)(PRG0)[T+Swe1.0_TheTranslator][b1]" E="Super Mario Bros. 2 (U)(PRG0)[T+Swe1.0_TheTranslator][b1]" L="sw" Y="1988" S="256K" C="Nintendo" u="18827176" H="2" />
+  <R A="67F68CABC5237A5892AFF746F5B784C62FCCDFAC" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[!]" E="Super Mario Bros. 2 (U)(PRG0)[!]" L="EN" Y="1988" S="256K" C="Nintendo" u="18827233" />
+  <R A="ACD878CBA25758C0CA4FFAC71DDF69AAA57ADBDA" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Fre100%_arkames]" E="Super Mario Bros. 2 (U)(PRG0)[T+Fre100%_arkames]" L="fr" Y="1988" S="256K" C="Nintendo" u="18827788" H="1" />
+  <R A="9208B318FB1F4A39818EA769DEC5D3F93FEF797D" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Ger1.0_StarTrans]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ger1.0_StarTrans]" L="de" Y="2000" S="256K" C="Nintendo" u="18827794" H="1" />
+  <R A="306EDE07ECEDEC8FA09A6629389C1DB59709B1A3" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Ger1.0_Giama][o1]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ger1.0_Giama][o1]" L="de" Y="1988" S="256K" C="Nintendo" u="18827799" H="1" />
+  <R A="B155723D7C22BFC18B6CC14F504E9BACDEA4DA98" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Ita1.0_SadNES_City]" E="Super Mario Bros. 2 (U)(PRG0)[T+Ita1.0_SadNES_City]" L="it" Y="1988" S="256K" C="Nintendo" u="18827809" H="1" />
+  <R A="615ACFBCF699A97E2C040489486E444B26A52CF2" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Por100%_Emuroms]" E="Super Mario Bros. 2 (U)(PRG0)[T+Por100%_Emuroms]" L="po" Y="1999" S="256K" C="Nintendo" u="18827816" H="1" />
+  <R A="D9B9D5389513FFA7FA07736BCDE30F30943A9557" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Swe1.0_TheTranslator]" E="Super Mario Bros. 2 (U)(PRG0)[T+Swe1.0_TheTranslator]" L="sw" Y="1988" S="256K" C="Nintendo" u="18827821" H="1" />
+  <R A="F2503878084F4153719198354BD3CC7DFC23ADB9" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Swe1.0_TheTranslator][b1]" E="Super Mario Bros. 2 (U)(PRG0)[T+Swe1.0_TheTranslator][b1]" L="sw" Y="1988" S="256K" C="Nintendo" u="18827826" H="1" />
+  <R A="15DEAA464D9752490547D459CD2F47BF66819088" T="ACT" N="超级马里奥兄弟2 (美)(PRG1)[T+Croatian_CROcOp]" E="Super Mario Bros. 2 (U)(PRG0)[T+Croation_CROcOp]" L="cr" Y="1988" S="256K" C="Nintendo" u="18827832" H="1" />
+  <R A="85E5C576B5303C0819C5D91574D91D8E578296BE" T="RAC" N="公路赛车 (日)" E="Road Fighter (J)" L="EN" Y="1985" S="24K" C="KONAMI" u="18828028" />
   <Version Version="0" />
 </dataSet>
