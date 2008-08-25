@@ -34,6 +34,7 @@ namespace Swift.ROM
 		    {
 				string fn=row["f"].ToString().Split('?')[0];
 				//判断文件是否存在，如果不存在则把ROM.xml文件中的f置NULL
+                fn = fn.Replace("<rom>", Application.StartupPath);
 				if (!File.Exists(fn))
 				{
 					row["f"] = DBNull.Value;
