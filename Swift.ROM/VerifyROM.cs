@@ -23,9 +23,6 @@ namespace Swift.ROM
 
 		public void Start()
 		{
-		//	FormWait fw = new FormWait();
-		//	fw.Text= "正在重新检查ROM.....";
-
 			Debug.WriteLine("验证线程开始工作..."+formMain.nowType);
 
 		    //验证所有现有的文件
@@ -77,7 +74,7 @@ namespace Swift.ROM
 
 		        try
 		        {
-		            foreach (string f in Directory.GetFiles(xe.GetAttribute("path")))
+		            foreach (string f in Directory.GetFiles(xe.GetAttribute("path").Replace("<rom>",Application.StartupPath)))
 		            {
 						//对压缩文件的支持
 						string ext1 = Path.GetExtension(f).Substring(1).ToUpper();
@@ -152,6 +149,15 @@ namespace Swift.ROM
 
 		}
 
+        private string cra(string s)
+        {
+            return s.Replace("<rom>", Application.StartupPath);
+        }
+        private string car(string s)
+        {
+            return s.Replace(Application.StartupPath, "<rom>");
+        }
+
 		/// <summary>
 		/// 验证指定文件
 		/// </summary>
@@ -165,23 +171,22 @@ namespace Swift.ROM
             //  有一个例外,NDS游戏中,IDS游戏的扩展名为IDS,这里单独处理一下。
             if (formMain.nowType == "NDS")
             {
-                if (ext != "NDS" && ext != "IDS")
-                    return;
+                if (ext != "NDS" && ext != "IDS") return;
             }
             else
             {
                 if (ext != formMain.nowType) return;
             }
 
-			//如果当前文件已经存在，则直接返回
+			//如果当前文件已经存在并不是压缩文件，则直接返回
 			if (zipFile == null)//非压缩文件的
 			{
-				if (formMain.dataTableR.Select("f='" + f.Replace("'", "''") + "'").Length > 0)
+                if (formMain.dataTableR.Select("f='" + car(f).Replace("'", "''") + "'").Length > 0)
 					return;
 			}
 			else//压缩文件的
 			{
-				if (formMain.dataTableR.Select("f='" + zipFile.Replace("'", "''") + "?" + Path.GetFileName(f).Replace("'", "''") + "'").Length > 0)
+                if (formMain.dataTableR.Select("f='" + car(zipFile).Replace("'", "''") + "?" + Path.GetFileName(f).Replace("'", "''") + "'").Length > 0)
 					return;
 			}
 
@@ -195,15 +200,15 @@ namespace Swift.ROM
 			{
 				if (rows[0]["f"] == DBNull.Value)
 				{
-					rows[0]["f"] = (zipFile == null) ? f :zipFile +"?"+ Path.GetFileName(f);
+					rows[0]["f"] = (zipFile == null) ? car(f) :car(zipFile) +"?"+ Path.GetFileName(f);
 				}
 				else//判断一下重复的是原来的错了,还是新的重复
 				{
 					//判断一下原来的文件是否是压缩文件
-					string[] fs = rows[0]["f"].ToString().Split('?');
+					string[] fs = cra(rows[0]["f"].ToString()).Split('?');
 					if (fs.Length == 1)//不是压缩文件
 					{
-						sha1 = Tools.GetFileSHA1(rows[0]["f"].ToString());
+						sha1 = Tools.GetFileSHA1(cra(rows[0]["f"].ToString()));
 					}
 					else //是压缩文件
 					{
@@ -212,7 +217,7 @@ namespace Swift.ROM
 						sha1 = Tools.GetFileSHA1(Application.StartupPath + @"\TEMP\VerifyROM\" + Path.GetFileName(fs[1]));
 					}
 
-					if (sha1 == null)	return;
+					if (sha1 == null) return;
 
 					if (sha1 == rows[0]["A"].ToString())
 					{
@@ -221,7 +226,7 @@ namespace Swift.ROM
 					}
 					else
 					{
-						rows[0]["f"] = (zipFile == null) ? f : zipFile+"?"+Path.GetFileName(f);
+						rows[0]["f"] = (zipFile == null) ? car(f) : car(zipFile)+"?"+Path.GetFileName(f);
 					}
 
 				}
@@ -233,7 +238,7 @@ namespace Swift.ROM
 			else
 			{
 				//计算ROM容量
-				FileStream fs= new FileStream(f, FileMode.Open, FileAccess.Read, FileShare.Read);
+				FileStream fs= new FileStream(cra(f), FileMode.Open, FileAccess.Read, FileShare.Read);
 				long fz = fs.Length;
 				string fzs = null;
 
@@ -251,7 +256,7 @@ namespace Swift.ROM
 				row["N"] = "未知ROM";
 				row["E"] = (zipFile==null)?Path.GetFileName(f):Path.GetFileName( zipFile);
 				row["S"] = fzs;
-				row["f"] = (zipFile == null) ? f : zipFile + "?" + Path.GetFileName(f);
+				row["f"] = (zipFile == null) ? car(f) : car(zipFile) + "?" + Path.GetFileName(f);
 				row["I"] = sha1;
 				formMain.dataTableR.Rows.Add(row);
 

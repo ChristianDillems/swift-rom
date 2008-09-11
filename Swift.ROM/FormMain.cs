@@ -647,36 +647,6 @@ namespace Swift.ROM
                 this.iconThread.IsBackground = true;
                 this.iconThread.Priority = ThreadPriority.Lowest;
                 this.iconThread.Start();
-
-                //Debug.WriteLine("重写图标");
-                //System.Drawing.Imaging.ImageAttributes ia = new System.Drawing.Imaging.ImageAttributes();
-                //float[][] colorMatrix = { new float[] { 0.299f, 0.299f, 0.299f, 0, 0 }, new float[] { 0.587f, 0.587f, 0.587f, 0, 0 }, new float[] { 0.114f, 0.114f, 0.114f, 0, 0 }, new float[] { 0.2f, 0.2f, 0.2f, 0, 0 }, new float[] { 0, 0, 0, 1, 0 }, new float[] { 0, 0, 0, 0, 1 } };
-                //Graphics g = null;
-                //Bitmap img;
-                //foreach (ListViewItem lvi in this.listView.Items)
-                //{
-                //    Application.DoEvents();
-
-                //    DataRow[] rows = this.dataTableR.Select("A='" + lvi.Tag.ToString() + "' and i is not null");
-                //    if (rows.Length == 0) continue;
-
-                //    img = new Bitmap(new MemoryStream(Convert.FromBase64String(rows[0]["i"].ToString())));
-
-                //    if (rows[0]["f"] == DBNull.Value)
-                //    {
-                //        g = Graphics.FromImage(img);
-                //        ia.SetColorMatrix(new System.Drawing.Imaging.ColorMatrix(colorMatrix), System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
-                //        g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
-                //    }
-
-                //    Debug.WriteLine("old=" + lvi.ImageIndex.ToString());
-
-                //    this.imageList1.Images.Add(img);
-                //    this.imageList2.Images.Add(img);
-                //    lvi.ImageIndex = this.imageList1.Images.Count - 1;
-
-                //    Debug.WriteLine("new=" + this.imageList1.Images.Count.ToString());
-                //}
             }
 
 			//自动验证所有ROM
@@ -965,7 +935,7 @@ namespace Swift.ROM
 			proc.StartInfo.FileName = emu;
 
 			//如果为压缩文件，则需要进行解压
-			string[] fs = row["f"].ToString().Split('?');
+			string[] fs = Tools.cra(row["f"].ToString()).Split('?');
 			if (fs.Length == 1)
 				proc.StartInfo.Arguments = "\"" + row["f"].ToString() + "\"";
 			else//为压缩文件
@@ -1018,7 +988,7 @@ namespace Swift.ROM
 			if (rows.Length == 0)
 				rows = this.dataTableR.Select("I='" + lvi.Tag.ToString() + "'");
 
-			this.labelMessage.Text = Path.GetFileName(rows[0]["f"].ToString());
+			this.labelMessage.Text = Path.GetFileName(Tools.cra(rows[0]["f"].ToString()));
 
 			try
 			{

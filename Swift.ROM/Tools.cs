@@ -62,6 +62,8 @@ namespace Swift.ROM
 			Debug.WriteLine("¿ªÊ¼½âÑ¹..." + zipFile);
 			Process proc = new Process();
 
+            zipFile = Tools.cra(zipFile);
+
 			switch (Path.GetExtension(zipFile).ToUpper())
 			{ 
 				case ".RAR":
@@ -110,6 +112,16 @@ namespace Swift.ROM
 
 			return Image.FromStream(ms);
 		}
+
+        public static string cra(string s)
+        {
+            return s.Replace("<rom>", Application.StartupPath);
+        }
+
+        public static string car(string s)
+        {
+            return s.Replace(Application.StartupPath, "<rom>");
+        }
 
         public static Bitmap GetIcon(string nds)
         {
