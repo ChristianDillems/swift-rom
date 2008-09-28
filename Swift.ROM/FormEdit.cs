@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
@@ -21,7 +22,11 @@ namespace Swift.ROM
 
             if (File.Exists(Application.StartupPath + "/Update-" + t + ".db"))
             {
-                File.Copy(Application.StartupPath + "/Update-" + t + ".db", Application.StartupPath + "/Update/" + t + DateTime.Now.ToString("yyyyMMddHHmmss") + ".db");
+                try
+                {
+                    File.Copy(Application.StartupPath + "/Update-" + t + ".db", Application.StartupPath + "/Update/" + t + DateTime.Now.ToString("yyyyMMddHHmmss") + ".db");
+                }
+                catch { }
                 this.dataSet1.ReadXml(Application.StartupPath + "/Update-" + t + ".db");
             }
 
@@ -31,6 +36,33 @@ namespace Swift.ROM
             DataRow[] rows = this.dataTableR.Select("A='" + this.textBoxA.Text + "'");
 			if (rows.Length > 0)
 			{
+				if (rows[0]["CRC32"].ToString() == "")
+				{
+					string file = f;
+					string[] ff = f.Split('?');
+					
+					string[][] r = Tools.GetCRC32(ff[0]);
+					foreach (string[] ss in r)
+					{
+						if(ff.Length>1)
+						{
+							if(ss[0].EndsWith(ff[1]))
+							{
+								this.textBoxCRC32.Text=ss[2];
+								break;
+							}
+						}
+						else
+						{
+							this.textBoxCRC32.Text = ss[2];
+						}
+					}
+				}
+				else
+					this.textBoxCRC32.Text = rows[0]["CRC32"].ToString();
+
+                System.Diagnostics.Debug.WriteLine("read crc="+this.textBoxCRC32.Text);
+
 				this.textBoxC.Text = rows[0]["C"].ToString();
 				this.textBoxE.Text = rows[0]["E"].ToString();
 				this.textBoxI.Text = rows[0]["I"].ToString();
@@ -45,7 +77,27 @@ namespace Swift.ROM
 			}
 			else
             {
-                this.textBoxS.Text = size;
+					string file = f;
+					string[] ff = f.Split('?');
+
+					string[][] r = Tools.GetCRC32(ff[0]);
+					foreach (string[] ss in r)
+					{
+						if (ff.Length > 1)
+						{
+							if (ss[0].EndsWith(ff[1]))
+							{
+								this.textBoxCRC32.Text = ss[2];
+								break;
+							}
+						}
+						else
+						{
+							this.textBoxCRC32.Text = ss[2];
+						}
+					}
+     
+					this.textBoxS.Text = size;
 
                 try
                 {
@@ -90,6 +142,7 @@ namespace Swift.ROM
              //   m = -m;
 
             row["A"] = this.textBoxA.Text.Trim();//SHA1
+            row["CRC32"] = this.textBoxCRC32.Text;  //CRC32
 			row["C"] = this.textBoxC.Text.Trim() == "" ? null : this.textBoxC.Text.Trim();//出品公司
 			row["E"] = this.textBoxE.Text.Trim() == "" ? null : this.textBoxE.Text.Trim();//英文名
 			row["I"] = this.textBoxI.Text.Trim() == "" ? null : this.textBoxI.Text.Trim();//信息
@@ -154,10 +207,14 @@ namespace Swift.ROM
 
         private void FormEdit_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.dataSet1.WriteXml(Application.StartupPath + "/Update-" + this.textBoxType.Text + ".db");
-            this.dataSet1.WriteXml(Application.StartupPath + "/Update-" + this.textBoxType.Text + ".xml");
-            this.dataSet1.WriteXml(Application.StartupPath + "/../../Update-" + this.textBoxType.Text + ".xml");
-            this.dataSet1.WriteXml(Application.StartupPath + "/../Release/Update-" + this.textBoxType.Text + ".xml");
+            try
+            {
+                this.dataSet1.WriteXml(Application.StartupPath + "/Update-" + this.textBoxType.Text + ".db");
+                this.dataSet1.WriteXml(Application.StartupPath + "/Update-" + this.textBoxType.Text + ".xml");
+                this.dataSet1.WriteXml(Application.StartupPath + "/../../Update-" + this.textBoxType.Text + ".xml");
+                this.dataSet1.WriteXml(Application.StartupPath + "/../Release/Update-" + this.textBoxType.Text + ".xml");
+            }
+            catch { }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

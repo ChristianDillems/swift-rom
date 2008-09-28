@@ -56,7 +56,6 @@ namespace Swift.ROM
 							cbUpdateLVI cb = new cbUpdateLVI(formMain.updateLVI);
 							formMain.Invoke(cb, new object[] { row, false, true });
 						}
-
 					//Application.DoEvents();
 				}
 		    }//foreach
@@ -76,6 +75,54 @@ namespace Swift.ROM
 		        {
 		            foreach (string f in Directory.GetFiles(xe.GetAttribute("path").Replace("<rom>",Application.StartupPath)))
 		            {
+						//判断文件是否已经被引用
+						string t_ext = Path.GetExtension(f).Substring(1).ToUpper();
+						if (t_ext == "RAR" || t_ext == "ZIP" || t_ext == "7Z")
+						{
+							if (formMain.dataTableR.Select("f like '" + f.Replace("'", "''").Replace("[", "[[]").Replace("_", "[_]") + "?*'").Length > 0)
+								continue;
+						}
+						else
+						{
+							if (formMain.dataTableR.Select("f = '" + f.Replace("'", "''").Replace("[", "[[]").Replace("_", "[_]") + "'").Length > 0)
+								continue;
+						}
+
+						bool flag = false;
+
+						//CRC32验证
+						string[][] crc32 = Tools.GetCRC32(f);
+						foreach (string[] crc in crc32)
+						{
+							string ext = crc[0].Substring(crc[0].Length - 3).ToUpper();
+							//判断文件是否是需要的文件
+							if (formMain.nowType == "NDS")
+							{
+								if (ext != "NDS" && ext != "IDS") continue;
+							}
+							else
+							{
+								if (ext != formMain.nowType) continue;
+							}
+
+							DataRow[] rows = formMain.dataTableR.Select("CRC32='" + crc[2] + "'");
+							if (rows.Length > 1)
+							{
+								Debug.WriteLine("CRC32碰撞!!!进行SHA1验证!");
+								flag = false;
+								break;
+							}
+							if (rows.Length == 1)
+							{
+								rows[0]["f"] = crc[0];
+								//更新显示
+								cbUpdateLVI cb = new cbUpdateLVI(formMain.updateLVI);
+								formMain.Invoke(cb, new object[] { rows[0], false, true });
+								flag = true;
+							}
+						}
+						if (flag) continue;
+
 						//对压缩文件的支持
 						string ext1 = Path.GetExtension(f).Substring(1).ToUpper();
 						//如果是支持的压缩格式，则进行相应的解压
@@ -84,9 +131,6 @@ namespace Swift.ROM
 							if (formMain.dataTableR.Select("f like '" + f.Replace("'", "''").Replace("[","[[]").Replace("_","[_]") + "?*'").Length > 0)
 								continue;
 
-							Debug.WriteLine("ext1=" + ext1);
-							Debug.WriteLine("正在验证的压缩文件:" + f);
-						
 							//测试压缩文件的内容是否是需要的
 							Process proc = new Process();
 							proc.StartInfo.FileName = Application.StartupPath + @"\"+(ext1=="RAR"?"UnRAR.exe":"7za.exe");
@@ -108,9 +152,10 @@ namespace Swift.ROM
                                 if (read.ToUpper().IndexOf("." + formMain.nowType) == -1)
                                     continue;
                             }
-							Debug.WriteLine("测试文件内容ExitCode=" + proc.ExitCode);
 
 							Debug.WriteLine("测试当前文件是压缩文件,进行解压...");
+
+							//
 
 							//删除以前临时目录中的文件
 							try

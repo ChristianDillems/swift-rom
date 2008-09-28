@@ -31,7 +31,7 @@ namespace Swift.ROM
 			{
 				return null;
 			}
-
+           
 			SHA1 sha1m = new SHA1Managed();
 			byte[] result = sha1m.ComputeHash(fs);
 
@@ -44,6 +44,189 @@ namespace Swift.ROM
 		}
 		#endregion
 
+        public static string[][] GetCRC32(string zipFile)
+        {
+            string ret = null;
+            zipFile = Tools.cra(zipFile);
+			char[] param = new char[] { ' '};
+
+			if (zipFile == "") return null;
+
+            //查看传递来的是压缩文件还是独立文件
+            switch (Path.GetExtension(zipFile).ToUpper())
+            {
+				case ".RAR":
+					{
+						//判断解压程序是否存在
+						if (!File.Exists(Application.StartupPath + @"\UnRAR.exe"))
+						{
+							MessageBox.Show("Not Found --> UnRAR.exe");
+							return null;
+						}
+
+						Process proc = new Process();
+						proc.StartInfo.FileName = Application.StartupPath + @"\UnRAR.exe";
+						proc.StartInfo.Arguments = "l \"" + zipFile + "\"";
+						proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+						proc.StartInfo.UseShellExecute = false;
+						proc.StartInfo.RedirectStandardOutput = true;
+						proc.StartInfo.CreateNoWindow = true;
+						proc.Start();
+					//	proc.WaitForExit();
+
+						string[] rs = proc.StandardOutput.ReadToEnd().Split('\n');//param, StringSplitOptions.RemoveEmptyEntries);
+						if (proc.ExitCode != 0)
+							return null;
+						proc.Dispose();
+
+						bool flag = false;
+						foreach (string s in rs)
+						{
+					//		Debug.Write(s);
+							if (s.Trim() == "-------------------------------------------------------------------------------")
+							{
+								if (flag) break; ;
+								flag = true;
+								continue;
+							}
+							if (flag)
+							{
+								string[] ls = s.Split(param, StringSplitOptions.RemoveEmptyEntries);
+								if (ls[ls.Length - 4] == ".D.....") continue;	//如果是目录则略过
+								//取文件名称
+								string filename = null;
+								for (int i = 0; i < ls.Length - 9; i++)
+									filename += " " + ls[i];
+								ret +=zipFile+"?"+ filename.Substring(1) + "\n";
+								ret += ls[ls.Length - 9] + "\n";    //取文件大小
+								ret += ls[ls.Length - 3] + "\n";    //取crc32
+							}
+						}
+					}
+					break;
+				case ".ZIP":
+				case ".7Z":
+					{
+						//判断解压程序是否存在
+						if (!File.Exists(Application.StartupPath + @"\7za.exe"))
+						{
+							MessageBox.Show("Not Found --> 7za.exe");
+							return null;
+						}
+
+						Process proc = new Process();
+						proc.StartInfo.FileName = Application.StartupPath + @"\7za.exe";
+						proc.StartInfo.Arguments = "l -slt \"" + zipFile + "\"";
+						proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+						proc.StartInfo.UseShellExecute = false;
+						proc.StartInfo.RedirectStandardOutput = true;
+						proc.StartInfo.CreateNoWindow = true;
+						proc.Start();
+					//	proc.WaitForExit();
+
+						string[] rs = proc.StandardOutput.ReadToEnd().Split('\n');//param, StringSplitOptions.RemoveEmptyEntries);
+						if (proc.ExitCode != 0)
+							return null;
+						proc.Dispose();
+
+						bool flag = false;
+						string tfile = null;
+						string tsize = null;
+						foreach (string s in rs)
+						{
+				//			Debug.Write(s);
+							if (s.Trim() == "----------")
+							{
+								flag = true;
+								continue;
+							}
+							if (flag)
+							{
+								if (s.StartsWith("Path = ")) { tfile = zipFile + "?" + s.Substring(7).Trim(); continue; }
+								if (s.StartsWith("Size = ")) { tsize = s.Substring(7).Trim(); continue; }
+								if (s == "Attributes = D....") { tfile = null; continue; }
+								if (s.StartsWith("CRC = ") && tfile != null)
+								{
+									ret += tfile + "\n" + tsize + "\n" + s.Substring(6).Trim() + "\n";
+								}
+							}
+						}
+					}
+					break;
+                default:
+					FileStream fs = new FileStream(zipFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    ret = zipFile+"\n"+fs.Length.ToString()+"\n"+GetFileCRC32(zipFile).ToString("X8")+"\n";
+					fs.Close();
+                    break;
+            }
+
+			if (ret == null) return null;
+			
+			//创建返回数组
+            //  rett[][0] 文件名称
+            //  rett[][1] 文件大小
+            //  rett[][2] CRC32
+            string[] rett = ret.Split('\n');
+            string[][] rets = new string[rett.Length / 3][];
+            for (int i = 0; i < rett.Length - 1; )
+            {
+                rets[i / 3] = new string[3];
+				rets[i / 3][0] = Tools.car(rett[i++]);
+                rets[i / 3][1] = rett[i++];
+                rets[i / 3][2] = rett[i++];
+            }
+
+            return rets;
+        }
+
+        /// <summary>   
+        /// 取文件CRC32值 
+        /// </summary>   
+        /// <param name="sInputFilename">文件名称</param>   
+        /// <returns></returns>
+        public static ulong GetFileCRC32(string sInputFilename)   
+        {   
+            ulong[] crc32Table = new ulong[256];  
+
+            const ulong ulPolynomial = 0xEDB88320;   
+            ulong dwCrc;   
+            int i, j;   
+            for (i = 0; i < 256; i++)   
+            {   
+                dwCrc = (ulong)i;   
+                for (j = 8; j > 0; j--)   
+                {   
+                    if ((dwCrc & 1) == 1)   
+                        dwCrc = (dwCrc >> 1) ^ ulPolynomial;   
+                    else  
+                        dwCrc >>= 1;   
+                }   
+                crc32Table[i] = dwCrc;   
+            }   
+
+
+            FileStream inFile = new System.IO.FileStream(sInputFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            byte[] buffer = new byte[inFile.Length];
+            inFile.Read(buffer, 0, buffer.Length);   
+            inFile.Close();
+
+            ulong ulCRC = 0xffffffff;
+            ulong len;
+            len = (ulong)buffer.Length;
+            for (ulong buffptr = 0; buffptr < len; buffptr++)
+            {
+                ulong tabPtr = ulCRC & 0xFF;
+                tabPtr = tabPtr ^ buffer[buffptr];
+                ulCRC = ulCRC >> 8;
+                ulCRC = ulCRC ^ crc32Table[tabPtr];
+            }
+            return ulCRC ^ 0xffffffff;   
+        }
+
+        /// <summary>
+        /// 指定一个文件
+        /// </summary>
+        /// <param name="fileName"></param>
 		public static void Start(string fileName)
 		{
 			Process proc = new Process();

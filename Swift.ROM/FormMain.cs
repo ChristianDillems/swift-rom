@@ -170,7 +170,8 @@ namespace Swift.ROM
 					row = rows[0];
                 }
 
-				row["A"] = xe.GetAttribute("A") == "" ? null : xe.GetAttribute("A"); 
+				row["A"] = xe.GetAttribute("A") == "" ? null : xe.GetAttribute("A");
+                row["CRC32"] = xe.GetAttribute("CRC32") == "" ? null : xe.GetAttribute("CRC32"); 
 				row["X"] = xe.GetAttribute("X") == "" ? null : xe.GetAttribute("X"); 
 				row["N"] = xe.GetAttribute("N") == "" ? null : xe.GetAttribute("N"); 
 				row["E"] = xe.GetAttribute("E") == "" ? null : xe.GetAttribute("E"); 
@@ -191,32 +192,6 @@ namespace Swift.ROM
                 Application.DoEvents();
             }
 
-            //重新计算未识别的ROM
-			//this.labelMessage.Text = "正在识别以前未识别的ROM";
-			//this.toolStripProgressBar.Maximum = this.dataTableR.Select("A is null").Length;
-			//this.toolStripProgressBar.Value = 0;
-			//Application.DoEvents();
-			//foreach (DataRow r in this.dataTableR.Select("A is null"))
-			//{
-			//    string sha1;
-			//    if (r["I"].ToString() == "")
-			//    {
-			//        sha1 = Tools.GetFileSHA1(r["f"].ToString());
-			//        r["I"] = sha1;
-			//        r.AcceptChanges();
-			//    }
-			//    else
-			//        sha1 = r["I"].ToString();
-
-			//    DataRow[] rows = this.dataTableR.Select("A='" + sha1 + "'");
-			//    if (rows.Length > 0)
-			//    {
-			//        rows[0]["f"] = r["f"];
-			//        r.Delete();
-			//    }
-
-			//    this.toolStripProgressBar.Value++;
-			//}
             this.dataTableR.AcceptChanges();
             this.dataSet.WriteXml(Application.StartupPath + "/" + type + "/ROM.xml");
 
@@ -864,7 +839,9 @@ namespace Swift.ROM
                     this.updateLVI(rows[0], false, true);
                 }
                 catch { }
+
 			}
+            f.Dispose();
 		}
 
 		/// <summary>
@@ -898,7 +875,7 @@ namespace Swift.ROM
 			this.toolStripStatusLabelState.Text = "正在停止后台验证...";
 
 			this.verifyThread.Abort();
-			while (this.verifyThread.ThreadState != System.Threading.ThreadState.Stopped)
+			while (this.verifyThread!=null && this.verifyThread.ThreadState != System.Threading.ThreadState.Stopped)
 				Application.DoEvents();
 		}
 
@@ -1136,6 +1113,8 @@ namespace Swift.ROM
             if (rows[0]["S"].ToString() != "") this.labelInfo.Text += this.listView.Columns[6].Text + ":" + rows[0]["S"] + "\n";
             if (rows[0]["C"].ToString() != "") this.labelInfo.Text += this.listView.Columns[7].Text + ":" + rows[0]["C"] + "\n";
             if (rows[0]["I"].ToString() != "") this.labelInfo.Text += rows[0]["I"].ToString().Replace('|', '\n');
+			this.labelInfo.Text += "\nCRC32=" + rows[0]["CRC32"];
+			this.labelInfo.Text += "\nSHA1=" + rows[0]["A"];
 		}
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -1675,6 +1654,19 @@ namespace Swift.ROM
                 m = (int)rows[0]["m"];
             for (int i = 3; i <= m; i++)
                 fd.download(this.nowType + "/" + lvi.Tag.ToString() + "_" + i.ToString("00") + ".png");
+        }
+
+        private void miTest_Click(object sender, EventArgs e)
+        {
+			string[][] r = Tools.GetCRC32(@"E:\ROM\GBA\2627 2005-10-11  AGB-B86P-EUR svg-b86p.rar");
+			//string[][] r = Tools.GetCRC32(@"d:\shanmin.pst");
+			if (r == null) return;
+           foreach (string[] ss in r)
+           {
+               Debug.WriteLine("ret1="+ss[0]);
+               Debug.WriteLine("ret2=" + ss[1]);
+               Debug.WriteLine("ret3=" + ss[2]);
+           }
         }
 
     }
