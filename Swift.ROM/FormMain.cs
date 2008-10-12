@@ -914,7 +914,7 @@ namespace Swift.ROM
 			//如果为压缩文件，则需要进行解压
 			string[] fs = Tools.cra(row["f"].ToString()).Split('?');
 			if (fs.Length == 1)
-				proc.StartInfo.Arguments = "\"" + row["f"].ToString() + "\"";
+				proc.StartInfo.Arguments = "\"" + Tools.cra(row["f"].ToString()) + "\"";
 			else//为压缩文件
 			{
 				Tools.unZIP(fs[0], Application.StartupPath + @"\TEMP\PlayROM\");
@@ -930,7 +930,6 @@ namespace Swift.ROM
 				MessageBox.Show("模拟器错误！", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 
-			//fw.Hide();
             fw.Close();
 		}
 

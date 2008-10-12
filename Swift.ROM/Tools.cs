@@ -296,11 +296,21 @@ namespace Swift.ROM
 			return Image.FromStream(ms);
 		}
 
+		/// <summary>
+		/// 替换&lt;rom>为真实路径
+		/// </summary>
+		/// <param name="s"></param>
+		/// <returns></returns>
         public static string cra(string s)
         {
             return s.Replace("<rom>", Application.StartupPath);
         }
 
+		/// <summary>
+		/// 把真实路径替换为&lt;rom>
+		/// </summary>
+		/// <param name="s"></param>
+		/// <returns></returns>
         public static string car(string s)
         {
             return s.Replace(Application.StartupPath, "<rom>");

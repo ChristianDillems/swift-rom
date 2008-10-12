@@ -210,8 +210,8 @@
 			// 
 			// toolStripContainer1.TopToolStripPanel
 			// 
-			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
 			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
 			// 
 			// statusStrip1
 			// 
