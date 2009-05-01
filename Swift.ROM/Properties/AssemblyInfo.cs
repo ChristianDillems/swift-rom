@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("shanmin co.")]
 [assembly: AssemblyProduct("Swift.ROM")]
-[assembly: AssemblyCopyright("Copyright (C) shanmin co. 2006-2008")]
+[assembly: AssemblyCopyright("Copyright (C) shanmin co. 2006-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      内部版本号
 //      修订号
 //
-[assembly: AssemblyVersion("8.11.19.0")]
-[assembly: AssemblyFileVersion("8.11.19.0")]
+[assembly: AssemblyVersion("9.05.01.0")]
+[assembly: AssemblyFileVersion("9.05.01.0")]

@@ -24,11 +24,6 @@ namespace Swift.ROM
          //   this.fw = new FormWait();
         }
 
-        /// <summary>
-        /// 等待窗口
-        /// </summary>
-      //  private FormWait fw;
-
         private String sortColumn;
 
 		/// <summary>
@@ -299,7 +294,6 @@ namespace Swift.ROM
 				else
 					this.nowVersion = Application.ProductVersion;
 				
-
 				//读取排序列
 				this.sortColumn = xe.GetAttribute("sort");
 				if (this.sortColumn == null) this.sortColumn = "X";
@@ -315,46 +309,6 @@ namespace Swift.ROM
 					}
 					catch { }
 				}
-
-				// TODO 这段代码2009年1月删除
-				//查看当前是否使用的旧版配置文件，如果是则进行升级
-				if (xd.SelectSingleNode("/ROM/NES") != null)
-				{
-					if (((XmlElement)xd.SelectSingleNode("/ROM/NES")).GetAttribute("Emu") != "")
-					{
-						string emu = ((XmlElement)xd.SelectSingleNode("/ROM/NES")).GetAttribute("Emu").Replace("<swift.rom>", Application.StartupPath);
-						xd.SelectSingleNode("/ROM/NES").AppendChild((XmlNode)xd.CreateElement("EMU"));
-						((XmlElement)xd.SelectSingleNode("/ROM/NES/EMU")).SetAttribute("Name",System.IO.Path.GetFileName(emu).Split('.')[0]);
-						((XmlElement)xd.SelectSingleNode("/ROM/NES/EMU")).SetAttribute("File", emu.Replace(Application.StartupPath,"<swift.rom>"));
-						((XmlElement)xd.SelectSingleNode("/ROM/NES/EMU")).SetAttribute("Default", "Default");
-						((XmlElement)xd.SelectSingleNode("/ROM/NES")).RemoveAttribute("Emu");
-					}
-				}
-				if (xd.SelectSingleNode("/ROM/GBA") != null)
-				{
-					if (((XmlElement)xd.SelectSingleNode("/ROM/GBA")).GetAttribute("Emu") != "")
-					{
-						string emu = ((XmlElement)xd.SelectSingleNode("/ROM/GBA")).GetAttribute("Emu").Replace("<swift.rom>", Application.StartupPath);
-						xd.SelectSingleNode("/ROM/GBA").AppendChild((XmlNode)xd.CreateElement("EMU"));
-						((XmlElement)xd.SelectSingleNode("/ROM/GBA/EMU")).SetAttribute("Name",System.IO.Path.GetFileName(emu).Split('.')[0]);
-						((XmlElement)xd.SelectSingleNode("/ROM/GBA/EMU")).SetAttribute("File", emu.Replace(Application.StartupPath,"<swift.rom>"));
-						((XmlElement)xd.SelectSingleNode("/ROM/GBA/EMU")).SetAttribute("Default", "Default");
-						((XmlElement)xd.SelectSingleNode("/ROM/GBA")).RemoveAttribute("Emu");
-					}
-				}
-				if (xd.SelectSingleNode("/ROM/NDS") != null)
-				{
-					if (((XmlElement)xd.SelectSingleNode("/ROM/NDS")).GetAttribute("Emu") != "")
-					{
-						string emu = ((XmlElement)xd.SelectSingleNode("/ROM/NDS")).GetAttribute("Emu").Replace("<swift.rom>", Application.StartupPath);
-						xd.SelectSingleNode("/ROM/NDS").AppendChild((XmlNode)xd.CreateElement("EMU"));
-						((XmlElement)xd.SelectSingleNode("/ROM/NDS/EMU")).SetAttribute("Name", System.IO.Path.GetFileName(emu).Split('.')[0]);
-						((XmlElement)xd.SelectSingleNode("/ROM/NDS/EMU")).SetAttribute("File", emu.Replace(Application.StartupPath, "<swift.rom>"));
-						((XmlElement)xd.SelectSingleNode("/ROM/NDS/EMU")).SetAttribute("Default", "Default");
-						((XmlElement)xd.SelectSingleNode("/ROM/NDS")).RemoveAttribute("Emu");
-					}
-				}
-				//2009.1删除到这
 
 				//判断设置文件是否完整，不完整的话补充完整
 				//nes
@@ -1617,12 +1571,12 @@ namespace Swift.ROM
                 fp = Application.StartupPath + @"\TEMP\CopyROM\" + rows[0]["f"].ToString().Split('?')[1];
             }
 
-            this.saveFileDialog1.FileName = Path.GetFileName(fp);
+            this.saveFileDialog1.FileName = Path.GetFileName(Tools.cra( fp));
             if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    File.Copy(fp, this.saveFileDialog1.FileName);
+                    File.Copy(Tools.cra( fp), this.saveFileDialog1.FileName);
                 }
                 catch { }
             }
